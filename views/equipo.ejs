@@ -1,0 +1,17 @@
+<%- include('templates/head.ejs', {TituloPrincipal:'Equipos Registrados'}) %>
+<body>
+    <%- include('templates/nav') %>
+    <div class="tituloPrincipal">
+        <h1 class="centrado"> <%= title %> </h1>
+    </div>
+    <div class="centrado">
+        <a href="/equipos/agregar"> <button class="buttonAgregar"><h3>¡Añadir!</h3></button> </a>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <%- include('templates/listar/equipoGet') %>
+    </div>
+</body>
+</html>

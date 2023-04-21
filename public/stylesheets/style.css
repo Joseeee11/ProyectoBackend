@@ -1,0 +1,175 @@
+body {
+  margin: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.tituloPrincipal {
+  font-size: 20px;
+  color: #25190e;
+}
+
+.tituloSub {
+  font-size: 15px;
+  color: #363433;
+  text-align: center;
+}
+.tituloLogin {
+  font-size: 16px;
+  color: #25190e;
+  margin-left: 20px;
+}
+.modo {
+  display: inline-block;
+
+}
+.centeer {
+  text-align: center;
+}
+
+
+/*BOTON*/
+.buttonAgregar {
+  background-color: #f89500bd;
+  border: none;
+  color: rgb(255, 255, 255);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+  border-radius: 8px;
+}
+.buttonAgregar:hover {
+  color: rgb(0, 0, 0);
+}
+.buttonLogin {
+  background-color: #f89500bd;
+  border: none;
+  color: rgb(255, 255, 255);
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 15px;
+  margin: 4px 2px;
+  border-radius: 8px;
+}
+.buttonLogin:hover {
+  color: rgb(0, 0, 0);
+}
+
+
+/*LOGIN*/
+/* Style inputs with type="text", select elements and textareas */
+.text1 {
+  width: 100%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+/* Style the submit button with a specific background color etc */
+.buttonLogin2{
+  background-color: #aa4f04;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+/* When moving the mouse over the submit button, add a darker green color */
+.buttonLogin2:hover {
+  background-color: #ce5f05;
+}
+/* Add a background color and some padding around the form */
+.containerLogin {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+
+/*BARRA DE NAV*/
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #f8c18d;
+  color: black;
+}
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #f77c35;
+  color: white;
+}
+
+
+
+
+/*LISTADO*/
+/* Three columns side by side */
+.column {
+  float: left;
+  width: 30%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+.centrado {
+  display: flex;
+  justify-content: center;
+}
+.textcentrado {
+  text-align: center;
+}
+/* Display the columns below each other instead of side by side on small screens */
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+/* Add some shadows to create a card effect */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+/* Some left and right padding inside the container */
+.container {
+  padding: 0 16px;
+}
+/* Clear floats */
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.title {
+  color: grey;
+}
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+.button:hover {
+  background-color: #555;
+}

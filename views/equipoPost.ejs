@@ -1,0 +1,35 @@
+<%- include('templates/head', {TituloPrincipal:'Agregar Equipos'}) %>
+<body>
+    <%- include('templates/nav') %>
+    <div class="tituloLogin">
+        <h2><%= title %></h2>
+    </div>
+    <div class="containerLogin">
+        <form action="/equipos/agregar" method="post">
+      
+          <label for="nombre">Nombre</label>
+          <input type="text" name="nombre" placeholder="Ingresa nombre del equipo..." class="text1">
+      
+          <label for="serial">Serial</label>
+          <input type="text" name="serial" placeholder="Ingresa serial del equipo..." class="text1">
+
+          <label for="descripcion">Descripcion</label>
+          <input type="text" name="descripcion" placeholder="Ingresa descripción del equipo..." class="text1">
+          
+          <label for="fecha_adquisicion">Fecha de Adquisición</label>
+          <input type="date" name="fecha_adquisicion" class="text1">
+      
+          <label for="estatus">Estatus</label>
+          <select name="estatus"  class="text1" required>
+            <option value="Ocupado">OCUPADO</option>
+            <option value="Disponible" selected>DISPONIBLE</option>
+            <option value="Mantenimiento">MANTENIMIENTO</option>
+          </select>
+      
+          <input type="submit" value="¡Añadir!" class="buttonLogin2">
+      
+        </form>
+    </div>
+</body>
+</html>
+    

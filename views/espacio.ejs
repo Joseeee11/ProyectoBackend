@@ -1,0 +1,17 @@
+<%- include('templates/head.ejs', {TituloPrincipal:'Espacios Registrados'}) %>
+<body>
+    <%- include('templates/nav') %>
+    <div class="tituloPrincipal">
+        <h1 class="centrado"> <%= title %> </h1>
+    </div>
+    <div class="centrado">
+        <a href="/espacios/agregar"> <button class="buttonAgregar buttonAgregar1"><h3>¡Añadir!</h3></button> </a>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <%- include('templates/listar/espacioGet') %>
+    </div>
+</body>
+</html>

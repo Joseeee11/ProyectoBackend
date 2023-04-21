@@ -1,0 +1,21 @@
+
+    <% if (resultado.length === 0) {%>
+        <h3 class="TituloPrincipal">No hay Equipos Registrados</h3>
+        <a href="/equipos/agregar"> <button class="buttonAgregar">¡Añade uno!</button> </a>
+    <% } else { resultado.forEach(equipo => {%>
+        
+        <div class="column">
+            <div class="card">
+            <div class="container">
+                <h2 class="textcentrado"><%= equipo.nombre  %></h2>
+                <p class="title textcentrado"><%= equipo.id  %></p>
+                <p class="title textcentrado"><%= equipo.estatus  %></p>
+                <p><i class="title">Serial:</i> <%= equipo.serial  %></p>
+                <p><i class="title">Descripción:</i> <%= equipo.descripcion  %></p>
+                <p><i class="title">Fecha de Adquisición:</i> <%= equipo.fecha_adquisicion  %></p>
+                <p><a href="/equipos/id<%= equipo.id %>"><button class="button">Detalles</button></a></p>
+            </div>
+            </div>
+        </div>
+        
+    <% })} %>

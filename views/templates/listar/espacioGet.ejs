@@ -1,0 +1,19 @@
+<% if (resultado.length === 0) {%>
+    <h3>No hay Espacios Registrados</h3>
+    <a href="/espacios/agregar"> <h3>¡Añade uno!</h3> </a>
+<% } else { resultado.forEach(espacio => {%>
+    
+    <div class="column">
+        <div class="card">
+        <div class="container">
+            <h2 class="textcentrado"><%= espacio.nombre  %></h2>
+            <p class="title textcentrado"><%= espacio.id  %></p>
+            <p class="title textcentrado"><%= espacio.estatus  %></p>
+            <p><i class="title">Direccion:</i> <%= espacio.direccion  %></p>
+            <p><i class="title">Descripción:</i> <%= espacio.descripcion  %></p>
+            <p> <a href="/espacios/id<%= espacio.id %>"><button class="button">Detalles</button></a></p>
+        </div>
+        </div>
+    </div>
+    
+<% })} %>

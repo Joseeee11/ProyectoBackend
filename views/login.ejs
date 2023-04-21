@@ -1,0 +1,27 @@
+<%- include('templates/head', {TituloPrincipal:'Iniciar Sesión'}) %>
+<body>
+    <%- include('templates/nav') %>
+    <div class="tituloLogin"><h1> <%= title %> </h1></div>
+    <div class="containerLogin">
+        <form action="/login" method="post">
+      
+          <label for="usuario">Usuario</label>
+          <input type="text" name="usuario" placeholder="Ingresa tu usuario..." class="text1" required>
+      
+          <label for="contrasena">Contraseña</label>
+          <input type="password" name="contrasena" placeholder="Ingresa tu contraseña..." class="text1" required>
+      
+          <label for="rol">ROL</label>
+          <select name="rol" class="text1" required>
+            <option value="admin">ADMIN</option>
+            <option value="personal" selected>PERSONAL</option>
+            <option value="solicitante">SOLICITANTE</option>
+          </select>
+      
+          <input type="submit" value="Iniciar Sesion" class="buttonLogin2">
+      
+        </form>
+    </div>
+
+</body>
+</html>
