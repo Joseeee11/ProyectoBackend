@@ -50,8 +50,9 @@ class reserva_equiposModel {
         return new Promise( (resolve, reject) => {
             console.log(parametro);
 
+            var contador = 0;
             function x (error, results, fields) {
-                console.log('Estoy en funcion x')
+                console.log('funcion')
                 if (error) reject (error);
                 resolve(results)
             }
@@ -68,7 +69,7 @@ class reserva_equiposModel {
                     verificarFecha
                     .then ((results) => {
                         results.forEach(reservas => {
-                            if (JSON.stringify(reservas.fecha) === JSON.stringify(`${parametro.fecha}`)) {
+                            if (reservas.fecha == parametro.fecha) {
                                 console.log("a")
                                 contador++
                                 return resolve("Ya el espacio esta ocupado ese día")
