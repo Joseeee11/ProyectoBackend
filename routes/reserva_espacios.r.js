@@ -7,7 +7,7 @@ var verificador = require("../middleware/login.mid.js");
 
 
 //Listar
-router.get('/', /*verificador.restringirSolicitante,*/ function(req, res, next) {
+router.get('/', verificador.restringirSolicitante, function(req, res, next) {
   reserva_espaciosControllers.listar()
   .then((resultado) => {
     res.send(resultado)
@@ -75,7 +75,7 @@ router.delete('/eliminar/:id',verificador.restringirSolicitante, function(req, r
 })  //PROBAR CON /eliminar/2
 
 //agregar espacios
-router.post('/agregar', /*verificador.restringirSolicitante,*/ function(req, res, next) {
+router.post('/agregar', verificador.restringirSolicitante, function(req, res, next) {
   const { hora_inicio , hora_fin, personal_solici, solicitante, fecha, motivo, espacio_solici} = req.body
   const parametro = { hora_inicio , hora_fin, personal_solici, solicitante, fecha, motivo, espacio_solici}
   reserva_espaciosControllers.agregar(parametro)

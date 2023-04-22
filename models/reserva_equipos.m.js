@@ -51,20 +51,24 @@ class reserva_equiposModel {
             console.log(parametro);
 
             var contador = 0;
-            function x (error, results, fields) {
+            
+
+            const equipo = new Promise ((resolve, reject) => connection.query('SELECT * FROM `equipos` WHERE id = ?', [parametro.equipo_solici], function (error, results, fields) {
                 console.log('funcion')
                 if (error) reject (error);
                 resolve(results)
-            }
-
-            const equipo = new Promise ((resolve, reject) => connection.query('SELECT * FROM `equipos` WHERE id = ?', [parametro.equipo_solici], x(error, results, fields))) 
+            })) 
 
             equipo
             .then((results) => {
                 if (results[0].estatus == "Ocupado") {
                     console.log('me encuentro en ocupado');
                     const verificarFecha = new Promise ((resolve, reject) => { 
-                        connection.query(`SELECT * FROM reservas_equipos WHERE equipo_solici = ?`, [parametro.equipo_solici], x(error, results, fields))   
+                        connection.query(`SELECT * FROM reservas_equipos WHERE equipo_solici = ?`, [parametro.equipo_solici], function (error, results, fields) {
+                            console.log('funcion')
+                            if (error) reject (error);
+                            resolve(results)
+                        })   
                     })
                     verificarFecha
                     .then ((results) => {
