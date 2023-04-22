@@ -20,6 +20,13 @@ router.get('/', seccion, verificador.restringirSolicitante, function(req, res, n
   })
 });
 
+router.get('/', seccion, verificador.restringirSolicitante, function(req, res, next) {
+
+
+  
+});
+
+
 //busqueda por Cedula
 router.get('/:CI', seccion,verificador.restringirSolicitante, function(req, res, next) {
   const parametro = req.params.CI

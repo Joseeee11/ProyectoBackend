@@ -20,6 +20,8 @@ class solicitantesControllers {
     })
   }
 
+  
+
   //listar por cedula
   listar_Cedula(parametro){
     return new Promise((resolve, reject) => {
