@@ -4,14 +4,14 @@ class reserva_equiposModel {
     //listar en general
     listar(){
         return new Promise((resolve, reject) => {
-            connection.query('SELECT r.id, s.nombre_apellido as solicitante_nombre, r.hora_inicio, r.hora_fin, pe.nombre as personal_solici_nombre, r.fecha, r.motivo, e.nombre as equipo_solici FROM reservas_equipos r INNER JOIN solicitantes s ON r.solicitante = s.id INNER JOIN personal pe ON r.personal_solici = pe.id INNER JOIN equipos e ON r.equipo_solici = e.id;', function (error, results, fields) {
+            connection.query('SELECT * FROM `reservas_equipos`', function (error, results, fields) {
                 if (error) throw error;
                 resolve (results);
             })
         })
     }
 
-    //listar por ID
+    //listar por ID 
     listarID(id) {
         return new Promise((resolve, reject) => {
             console.log('estamos listando')
@@ -46,14 +46,62 @@ class reserva_equiposModel {
 
     //agregando
     agregar(parametro){
-        console.log("llegaaaaa");
         console.log("estoy agregando")
-        return new Promise((resolve, reject) => {
+        return new Promise( (resolve, reject) => {
             console.log(parametro);
-            connection.query("INSERT INTO `reservas_equipos` set ?", [parametro], function (error, results, fields) {
-            if (error) reject (error);
-                resolve("Se agrego correctamente");
+
+            function x (error, results, fields) {
+                console.log('Estoy en funcion x')
+                if (error) reject (error);
+                resolve(results)
+            }
+
+            const equipo = new Promise ((resolve, reject) => connection.query('SELECT * FROM `equipos` WHERE id = ?', [parametro.equipo_solici], x(error, results, fields))) 
+
+            equipo
+            .then((results) => {
+                if (results[0].estatus == "Ocupado") {
+                    console.log('me encuentro en ocupado');
+                    const verificarFecha = new Promise ((resolve, reject) => { 
+                        connection.query(`SELECT * FROM reservas_equipos WHERE equipo_solici = ?`, [parametro.equipo_solici], x(error, results, fields))   
+                    })
+                    verificarFecha
+                    .then ((results) => {
+                        results.forEach(reservas => {
+                            if (JSON.stringify(reservas.fecha) === JSON.stringify(`${parametro.fecha}`)) {
+                                console.log("a")
+                                contador++
+                                return resolve("Ya el espacio esta ocupado ese día")
+                            }
+                            return
+                        });
+                        resolve('ya wey')
+                    })
+                    .catch((err) => {
+                        reject(err)
+                    })
+                }
             })
+            .catch((err) => {
+                reject(err)
+            })
+
+            if (contador === 0) {
+
+                const agregado = new Promise((resolve, reject) => {
+                    connection.query('INSERT INTO `reservas_equipos` set ?', [parametro], function (error, results, fields) {
+                        if (error) reject (error);
+                        resolve("Se agrego correctamente");
+                    })
+                })
+                connection.query(`UPDATE equipos set estatus = "Ocupado" WHERE id = ?`, [parametro.equipo_solici], function (error, results, fields) {
+                    if (error) reject (error);
+                    console.log('actualizado')
+                    resolve(agregado);
+                })
+                
+            }
+            
         })
     }
 
