@@ -12,14 +12,27 @@
     </div>
     <br>
     <br>
-    <div class="centeer">
-      <div class="modo">
-        <h2 class="tituloPrincipal">Inicia Sesión en </h2>
+
+    <% if (!cookie) {%>
+      <div class="centeer">
+        <div class="modo">
+          <h2 class="tituloPrincipal">Inicia Sesión en </h2>
+        </div>
+        
+        <div class="modo">
+          <a href="/login"> <button class="buttonAgregar">¡LOG IN!</button> </a>
+        </div>
       </div>
-      
-      <div class="modo">
-        <a href="/login"> <button class="buttonAgregar">¡LOG IN!</button> </a>
+    <% } else {%>
+      <div class="centeer">
+        <div class="modo">
+          <h2 class="tituloPrincipal">Cierra Sesión en </h2>
+        </div>
+        
+        <div class="modo">
+          <a href="/logout"> <button class="buttonAgregar">¡LOG OUT!</button> </a>
+        </div>
       </div>
-    </div>
+    <% } %>
   </body>
 </html>

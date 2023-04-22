@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.status(200).render('index', { title: 'SALA DE AUDIOVISUALES' });
+  res.status(200).render('index', { title: 'SALA DE AUDIOVISUALES' , cookie : req.cookies});
 });
 
 module.exports = router;
