@@ -8,7 +8,7 @@ const {seccion} = require("../middleware/login.mid")
 
 
 
-router.get('/', /*verificador.restringirSolicitante,*/ function(req, res, next) {
+router.get('/',  seccion, verificador.restringirSolicitante, function(req, res, next) {
   reserva_equiposControllers.listar()
   .then((resultado) => {
     res.send(resultado)
@@ -59,7 +59,7 @@ router.get('/fechasRango/:fechaI/:fechaF', seccion,verificador.restringirSolicit
 })    //PROBAR CON /fechasRango/2023-02-02/2023-12-12
 
 //agregar equipos
-router.post('/agregar', /*verificador.restringirSolicitante,*/ function(req, res, next) {
+router.post('/agregar',  seccion, verificador.restringirSolicitante, function(req, res, next) {
   const { solicitante , hora_inicio, hora_fin, personal_solici, fecha, motivo, equipo_solici} = req.body
   const parametro = { solicitante, hora_inicio , hora_fin, personal_solici, fecha, motivo, equipo_solici}
   reserva_equiposControllers.agregar(parametro)
