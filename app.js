@@ -13,7 +13,7 @@ var trabajosRouter = require('./routes/trabajos.r');
 var reserva_espaciosRouter = require('./routes/reserva_espacios.r');
 var reserva_equiposRouter = require('./routes/reserva_equipos.r');
 var loginRouter = require('./routes/login.r');
-
+var logoutRouter = require('./routes/logout.r');
 
 var app = express();
 
@@ -39,7 +39,7 @@ app.use('/trabajos', trabajosRouter);
 app.use('/reserva_espacios', reserva_espaciosRouter);
 app.use('/reserva_equipos', reserva_equiposRouter);
 app.use('/login', loginRouter);
-
+app.use('/logout', logoutRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

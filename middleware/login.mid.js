@@ -64,5 +64,12 @@ class verificador3000{
             return res.send("Necesita tener un token")
         }
     }
+    async seccion(req, res, next) {
+        const {GalletaDeToken} = req.cookies
+        if (!GalletaDeToken) {
+          res.status(404).redirect('/login')
+        }
+        next()
+      }
 }
 module.exports = new verificador3000();
