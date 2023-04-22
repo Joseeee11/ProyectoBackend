@@ -13,7 +13,7 @@ var verificador = require("../middleware/login.mid.js");
 const bcryptjs = require('bcryptjs');
 
 //listar
-router.get('/',verificador.restringirSolicitante, function(req, res, next) {
+router.get('/', /*verificador.restringirSolicitante,*/ function(req, res, next) {
   personalControllers.listar()
   .then((resultado)=>{
     res.send(resultado)
@@ -35,7 +35,7 @@ router.get('/:CI',verificador.restringirSolicitante, function(req, res, next) {
 });
 
 // post
-router.post('/agregar',verificador.soloAdmin, function(req, res, next) {
+router.post('/agregar', /*verificador.soloAdmin,*/ function(req, res, next) {
   const { usuario_unico, nombre, CI, cargo, especialidad, contrasena} = req.body
   const parametro = { usuario_unico, nombre, CI, cargo, especialidad, contrasena}
   personalControllers.agregar(parametro)
@@ -51,7 +51,7 @@ router.post('/agregar',verificador.soloAdmin, function(req, res, next) {
 
 
 //eliminar
-router.delete('/eliminar/:CI',verificador.soloAdmin, function(req, res, next) {
+router.delete('/eliminar/:CI', /*verificador.soloAdmin,*/ function(req, res, next) {
   const parametro = req.params.CI
   personalControllers.eliminar(parametro)
   .then((resultado) => {

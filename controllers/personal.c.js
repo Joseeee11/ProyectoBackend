@@ -92,17 +92,18 @@ class personalControllers {
            console.log('No existe personal');
            return resolve(`No hay personal registrado con la CI: ${parametro}`)
         };
-        const eliminado = new Promise((resolve, reject) => {
-          personalModel.eliminar(parametro)
-          .then(() => {
-            console.log('ya se elimino')
-            resolve(`se ha eliminado la persona con la CI: ${parametro}`);
-          })
-          .catch((err) => {
-            reject(err);
-          })
+        var dato = resultado[0].usuario_unico;
+        
+        personalModel.eliminar(parametro, dato)
+        .then(() => {
+          console.log('ya se elimino')
+          resolve(`se ha eliminado la persona con la CI: ${parametro}`);
         })
-        resolve(eliminado);
+        .catch((err) => {
+          reject(err);
+        })
+        
+        resolve('se elimino');
       })
       .catch((err) => {
         reject(err)

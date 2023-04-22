@@ -50,10 +50,16 @@ class personalModel{
     }
 
     //eliminar
-    eliminar(parametro){
+    eliminar(parametro, dato){
         console.log('estoy eliminando')
         return new Promise((resolve, reject) => {
-            console.log(`vamos a eliminar ${parametro}`)
+            console.log(`vamos a eliminar al personal ${dato}`)
+
+            connection.query('DELETE FROM `usuarios` WHERE usuario = ?' , [dato] , function (error, results, fields) {
+                if (error) throw error;
+                resolve()
+            })
+
             connection.query('DELETE FROM `personal` WHERE CI = ?' , [parametro] , function (error, results, fields) {
                 if (error) throw error;
                 resolve()

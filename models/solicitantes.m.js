@@ -14,7 +14,7 @@ class solicitantesModel {
     }
 
     //listar por cedula
-    listar_Cedula(parametro) {
+    listarCedula(parametro) {
         console.log('llegamos a modelo')
         return new Promise((resolve, reject) => {
             connection.query('SELECT * FROM `solicitantes` WHERE CI = ?' , [parametro] , function (error, results, fields) {
@@ -45,6 +45,25 @@ class solicitantesModel {
                 resolve("Se agrego correctamente");
             })
 
+        })
+    }
+
+    //eliminar
+    eliminar(parametro, dato){
+        console.log('estoy eliminando')
+        return new Promise((resolve, reject) => {
+            console.log(`vamos a eliminar el solicitante ${dato}`)
+
+            connection.query('DELETE FROM `usuarios` WHERE usuario = ?' , [dato] , function (error, results, fields) {
+                if (error) throw error;
+                console.log('estoy eliminando de la tabla usuario')
+                resolve('se elimino de la tabla usuario')
+            })
+
+            connection.query('DELETE FROM `solicitantes` WHERE CI = ?' , [parametro] , function (error, results, fields) {
+                if (error) throw error;
+                resolve('eliminado')
+            })
         })
     }
 }

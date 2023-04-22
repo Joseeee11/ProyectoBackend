@@ -24,7 +24,7 @@ class solicitantesControllers {
   listar_Cedula(parametro){
     return new Promise((resolve, reject) => {
 
-      solicitantesModel.listar_Cedula(parametro)
+      solicitantesModel.listarCedula(parametro)
       .then((json) => {
         let resultado = JSON.parse(json)
         if (resultado.length == 0) {
@@ -73,6 +73,34 @@ class solicitantesControllers {
           })
         }
         resolve (`Se agregó correctamente el solicitante: ${parametro.nombre_apellido}`)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+    })
+  }
+
+  //ELIMINAR
+  eliminar(parametro) {
+    return new Promise((resolve, reject) => {
+      console.log('estoy aqui')
+      solicitantesModel.listarCedula(parametro)
+      .then((json) => {
+        let resultado = JSON.parse(json)
+        if (resultado.length == 0) {
+           console.log('No existe solicitante');
+           return resolve(`No hay solicitante registrado con la CI: ${parametro}`)
+        };
+        var dato = resultado[0].usuario_unico;
+        solicitantesModel.eliminar(parametro, dato) //Llamamos a la funcion eliminar enviamos la variable parametro (esto para que la DB encuentre el solicitante a eliminar)
+        .then(() => {
+          console.log('se elimino')
+          resolve(`se ha eliminado el solicitante con el id: ${parametro}`); //avisamos que se elimino correctamente
+        })
+        .catch((err) => {
+          reject(err); //si hay un error
+        })
+        resolve('se elimino');
       })
       .catch((err) => {
         reject(err)

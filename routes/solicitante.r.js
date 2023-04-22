@@ -8,7 +8,7 @@ var verificador = require("../middleware/login.mid.js");
 const bcryptjs = require('bcryptjs');
 
 //mostrar
-router.get('/',verificador.restringirSolicitante, function(req, res, next) {
+router.get('/', verificador.restringirSolicitante, function(req, res, next) {
   solicitantesControllers.listar()
   .then((resultado) => {
     res.send(resultado);
@@ -32,7 +32,7 @@ router.get('/:CI',verificador.restringirSolicitante, function(req, res, next) {
 
 
 //agregar
-router.post('/agregar',verificador.restringirSolicitante, function(req, res, next) {
+router.post('/agregar', verificador.restringirSolicitante, function(req, res, next) {
   const { usuario_unico, nombre_apellido, CI, fecha_nacimiento, direccion, contrasena, nro_telefono} = req.body
   const parametro = { usuario_unico, nombre_apellido, CI, fecha_nacimiento, direccion, contrasena, nro_telefono}
   solicitantesControllers.agregar(parametro)
@@ -44,5 +44,17 @@ router.post('/agregar',verificador.restringirSolicitante, function(req, res, nex
     res.send(err)
   })
 });
+
+//eliminar
+router.delete('/eliminar/:CI', verificador.restringirSolicitante, function(req, res, next) {
+  const parametro = req.params.CI
+  solicitantesControllers.eliminar(parametro)
+  .then((resultado) => {
+    res.send(resultado);
+  })
+  .catch((err) => {
+    res.send(err)
+  })
+})
 
 module.exports = router;

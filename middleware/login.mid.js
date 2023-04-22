@@ -1,4 +1,4 @@
-const Verificadorneitor3000 = require("../helpers/login.h")
+const Verificadorneitor3000 = require("../helpers/login.h") 
 
 class verificador3000{
     async verificador(req, res, next){
