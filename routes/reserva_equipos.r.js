@@ -4,10 +4,10 @@ var router = express.Router();
 //importar controladores OJO, NO MODIFICAR
 var reserva_equiposControllers = require("../controllers/reserva_equipos.c.js")
 var verificador = require("../middleware/login.mid.js");
+const {seccion} = require("../middleware/login.mid")
 
 
-
-router.get('/', /*verificador.restringirSolicitante,*/ function(req, res, next) {
+router.get('/', seccion, /*verificador.restringirSolicitante,*/ function(req, res, next) {
   reserva_equiposControllers.listar()
   .then((resultado) => {
     res.send(resultado)
@@ -18,7 +18,7 @@ router.get('/', /*verificador.restringirSolicitante,*/ function(req, res, next) 
 });
 
 //listar po ID
-router.get('/:id',verificador.restringirSolicitante, function(req, res, next) {
+router.get('/:id', seccion,verificador.restringirSolicitante, function(req, res, next) {
   const id = req.params.id
   reserva_equiposControllers.listarID(id)
   .then((resultado) => {
@@ -30,7 +30,7 @@ router.get('/:id',verificador.restringirSolicitante, function(req, res, next) {
 });
 
 //listar por fecha
-router.get('/fecha/:fecha',verificador.restringirSolicitante, function(req, res, next) {
+router.get('/fecha/:fecha', seccion,verificador.restringirSolicitante, function(req, res, next) {
   let parametro = req.params.fecha
   console.log(`buscar reserva con la fecha ${parametro}`) //
   reserva_equiposControllers.listarFecha(parametro)
@@ -43,7 +43,7 @@ router.get('/fecha/:fecha',verificador.restringirSolicitante, function(req, res,
 });
 
 //listar por rango de fechas
-router.get('/fechasRango/:fechaI/:fechaF',verificador.restringirSolicitante, function(req, res, next) {
+router.get('/fechasRango/:fechaI/:fechaF', seccion,verificador.restringirSolicitante, function(req, res, next) {
   let fechaI = req.params.fechaI
   let fechaF = req.params.fechaF
 
@@ -58,7 +58,7 @@ router.get('/fechasRango/:fechaI/:fechaF',verificador.restringirSolicitante, fun
 })    //PROBAR CON /fechasRango/2023-02-02/2023-12-12
 
 //agregar equipos
-router.post('/agregar', /*verificador.restringirSolicitante,*/ function(req, res, next) {
+router.post('/agregar', seccion, /*verificador.restringirSolicitante,*/ function(req, res, next) {
   const { solicitante , hora_inicio, hora_fin, personal_solici, fecha, motivo, equipo_solici} = req.body
   const parametro = { solicitante, hora_inicio , hora_fin, personal_solici, fecha, motivo, equipo_solici}
   reserva_equiposControllers.agregar(parametro)
@@ -73,7 +73,7 @@ router.post('/agregar', /*verificador.restringirSolicitante,*/ function(req, res
 
 
 //ELIMINAR
-router.delete('/eliminar/:id',verificador.restringirSolicitante, function(req, res, next) {
+router.delete('/eliminar/:id', seccion,verificador.restringirSolicitante, function(req, res, next) {
   const id = req.params.id
   console.log(id); //id que vamos a borrar
 

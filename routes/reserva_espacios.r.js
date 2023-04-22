@@ -4,10 +4,11 @@ var router = express.Router();
 //importar controladores OJO, NO MODIFICAR
 var reserva_espaciosControllers = require("../controllers/reserva_espacios.c.js")
 var verificador = require("../middleware/login.mid.js");
+const {seccion} = require("../middleware/login.mid")
 
 
 //Listar
-router.get('/', /*verificador.restringirSolicitante,*/ function(req, res, next) {
+router.get('/', seccion, /*verificador.restringirSolicitante,*/ function(req, res, next) {
   reserva_espaciosControllers.listar()
   .then((resultado) => {
     res.send(resultado)
@@ -18,7 +19,7 @@ router.get('/', /*verificador.restringirSolicitante,*/ function(req, res, next) 
 });
 
 //Listar por ID
-router.get('/:id',verificador.restringirSolicitante, function(req, res, next) {
+router.get('/:id', seccion,verificador.restringirSolicitante, function(req, res, next) {
   let parametro = req.params.id
   console.log(parametro)
 
@@ -33,7 +34,7 @@ router.get('/:id',verificador.restringirSolicitante, function(req, res, next) {
 });
 
 //listar por fecha
-router.get('/fecha/:fecha',verificador.restringirSolicitante, function(req, res, next) {
+router.get('/fecha/:fecha', seccion,verificador.restringirSolicitante, function(req, res, next) {
   let parametro = req.params.fecha
   console.log(`buscar reserva con la fecha ${parametro}`) //
   reserva_espaciosControllers.listarFecha(parametro)
@@ -46,7 +47,7 @@ router.get('/fecha/:fecha',verificador.restringirSolicitante, function(req, res,
 });
 
 //listar por rango de fechas
-router.get('/fechasRango/:fechaI/:fechaF',verificador.restringirSolicitante, function(req, res, next) {
+router.get('/fechasRango/:fechaI/:fechaF', seccion,verificador.restringirSolicitante, function(req, res, next) {
   let fechaI = req.params.fechaI
   let fechaF = req.params.fechaF
 
@@ -61,7 +62,7 @@ router.get('/fechasRango/:fechaI/:fechaF',verificador.restringirSolicitante, fun
 })    //PROBAR CON /fechasRango/2014-02-02/2015-12-12
 
 //ELIMINAR 
-router.delete('/eliminar/:id',verificador.restringirSolicitante, function(req, res, next) {
+router.delete('/eliminar/:id', seccion,verificador.restringirSolicitante, function(req, res, next) {
   const parametro = req.params.id
   console.log(parametro); //id que vamos a borrar
   reserva_espaciosControllers.eliminar(parametro)
@@ -75,7 +76,7 @@ router.delete('/eliminar/:id',verificador.restringirSolicitante, function(req, r
 })  //PROBAR CON /eliminar/2
 
 //agregar espacios
-router.post('/agregar', /*verificador.restringirSolicitante,*/ function(req, res, next) {
+router.post('/agregar', seccion, /*verificador.restringirSolicitante,*/ function(req, res, next) {
   const { hora_inicio , hora_fin, personal_solici, solicitante, fecha, motivo, espacio_solici} = req.body
   const parametro = { hora_inicio , hora_fin, personal_solici, solicitante, fecha, motivo, espacio_solici}
   reserva_espaciosControllers.agregar(parametro)

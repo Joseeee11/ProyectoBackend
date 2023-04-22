@@ -67,7 +67,7 @@ class verificador3000{
     async seccion(req, res, next) {
         const {GalletaDeToken} = req.cookies
         if (!GalletaDeToken) {
-          res.status(404).redirect('/login')
+          return res.status(404).redirect('/login')
         }
         next()
       }
