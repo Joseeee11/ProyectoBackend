@@ -4,11 +4,13 @@ var router = express.Router();
 //importar controladores 
 var solicitantesControllers = require("../controllers/solicitantes.c.js")
 var verificador = require("../middleware/login.mid.js");
+const {seccion} = require("../middleware/login.mid")
+
 //importamos bcrypt
 const bcryptjs = require('bcryptjs');
 
 //mostrar
-router.get('/', verificador.restringirSolicitante, function(req, res, next) {
+router.get('/', seccion, verificador.restringirSolicitante, function(req, res, next) {
   solicitantesControllers.listar()
   .then((resultado) => {
     res.send(resultado);
@@ -19,7 +21,7 @@ router.get('/', verificador.restringirSolicitante, function(req, res, next) {
 });
 
 //busqueda por Cedula
-router.get('/:CI',verificador.restringirSolicitante, function(req, res, next) {
+router.get('/:CI', seccion,verificador.restringirSolicitante, function(req, res, next) {
   const parametro = req.params.CI
   solicitantesControllers.listar_Cedula(parametro)
   .then((resultado) => {
@@ -32,7 +34,7 @@ router.get('/:CI',verificador.restringirSolicitante, function(req, res, next) {
 
 
 //agregar
-router.post('/agregar', verificador.restringirSolicitante, function(req, res, next) {
+router.post('/agregar', seccion, verificador.restringirSolicitante, function(req, res, next) {
   const { usuario_unico, nombre_apellido, CI, fecha_nacimiento, direccion, contrasena, nro_telefono} = req.body
   const parametro = { usuario_unico, nombre_apellido, CI, fecha_nacimiento, direccion, contrasena, nro_telefono}
   solicitantesControllers.agregar(parametro)
@@ -46,7 +48,7 @@ router.post('/agregar', verificador.restringirSolicitante, function(req, res, ne
 });
 
 //eliminar
-router.delete('/eliminar/:CI', verificador.restringirSolicitante, function(req, res, next) {
+router.delete('/eliminar/:CI', seccion, verificador.restringirSolicitante, function(req, res, next) {
   const parametro = req.params.CI
   solicitantesControllers.eliminar(parametro)
   .then((resultado) => {

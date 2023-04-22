@@ -6,11 +6,12 @@ var router = express.Router();
 var espaciosControllers = require("../controllers/espacios.c.js")
 var verificador = require("../middleware/login.mid.js");
 const { token } = require('morgan');
+const {seccion} = require("../middleware/login.mid")
 
 
 
 //LISTAR
-router.get('/', verificador.verificador, function(req, res, next) {
+router.get('/', seccion, verificador.verificador, function(req, res, next) {
   console.log('ESTAMOS EN RUTA');
   espaciosControllers.listar()
   .then ((resultado) => {
@@ -21,7 +22,7 @@ router.get('/', verificador.verificador, function(req, res, next) {
   })
 });
 
-router.get('/id:id',verificador.verificador, function(req, res, next) {
+router.get('/id:id', seccion,verificador.verificador, function(req, res, next) {
   let parametro = req.params.id
   espaciosControllers.listarID(parametro)
   .then((resultado) => {
@@ -33,7 +34,7 @@ router.get('/id:id',verificador.verificador, function(req, res, next) {
 });
 
 //MODIFICAR ESPACIOS 
-router.put('/modificar/:id',verificador.restringirSolicitante, function(req, res, next) {
+router.put('/modificar/:id', seccion,verificador.restringirSolicitante, function(req, res, next) {
   const parametro = req.params.id; 
   let { nombre , direccion , descripcion , estatus } = req.body; 
   const espacioModificar = { nombre , direccion , descripcion , estatus } 
@@ -47,10 +48,11 @@ router.put('/modificar/:id',verificador.restringirSolicitante, function(req, res
 })
 
 //AGREGAR ESPACIOS
-router.get('/agregar', verificador.restringirSolicitante, function(req, res, next) {
+router.get('/agregar', seccion, verificador.restringirSolicitante, function(req, res, next) {
   res.status(200).render('espacioPOST', { title: 'Añade un Espacio' });
 });
-router.post('/agregar',verificador.restringirSolicitante, function(req, res, next) {
+
+router.post('/agregar', seccion,verificador.restringirSolicitante, function(req, res, next) {
   const { nombre, direccion, descripcion, estatus} = req.body
   const parametro = { nombre, direccion, descripcion, estatus}
   espaciosControllers.agregar(parametro)
