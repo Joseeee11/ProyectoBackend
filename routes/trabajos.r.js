@@ -109,7 +109,10 @@ router.post('/agregar', seccion,verificador.restringirSolicitante, function(req,
     console.log("se agrego correctamente :)")
     res.status(200).redirect('/trabajos')
   })
-  .catch(() => {
+  .catch((err) => {
+    if (err != null) {
+      res.status(404).send(err)
+    }
     trabajosControllers.revisarAgregar()
     .then((disponible)=>{
       res.status(200).redirect('/trabajos')
