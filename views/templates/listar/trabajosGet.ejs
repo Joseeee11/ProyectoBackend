@@ -1,12 +1,16 @@
 <% if (resultado.length === 0) {%>
-    <h3 class="TituloPrincipal">No hay Personal Registrados</h3>
-    <a href="/personal/agregar"> <button class="buttonAgregar">¡Añade uno!</button> </a>
-<% } else { resultado.forEach(personal => {%>
+    <h3 class="TituloPrincipal">No hay Trabajos Registrados</h3>
+    <a href="/trabajos/agregar"> <button class="buttonAgregar">¡Añade uno!</button> </a>
+<% } else { resultado.forEach(trabajo => {%>
     
-    <div class="containerP">
-        <p class="textcentrado"><span> #<%= personal.id %> <%= personal.nombre  %></span> <span><%= personal.cargo  %></span></p>
-        <p class="textcentrado"><i>C.I: </i> <b><%= personal.CI %></b> ....  <i>Usuario: </i> <b><%= personal.usuario_unico  %></b>  </p>
-        <p class="textcentrado"><i>Especialidad: </i><b><%= personal.especialidad  %></b></p>
+    <div class="containerT">
+        <p class="textcentrado"> <span>Trabajo #<%= trabajo.id %></span></p>
+        <p class="textcentrado title"><%= trabajo.descripcion  %> </p>
+        <p class="textcentrado">Inicia el día: <%= trabajo.fecha_inicio  %></p>
+        <p class="textcentrado">Finaliza el día: <%= trabajo.fecha_fin  %></p>
+        <p class="textcentrado"><i>Personal solicitado: </i> <b><%= trabajo.personal_solici  %></b> <a href="/equipos/id<%= trabajo.personal_solici  %>"><button class="ver">Ver</button></a></p>
+        <p class="textcentrado"><i>Equipo solicitado: </i> <b><%= trabajo.equipos_solici  %></b> <a href="/equipos/id<%= trabajo.equipos_solici %>"><button>Ver</button></a></p>
+        <p class="textcentrado"><i>Reserva: </i> <b><%= trabajo.reserva_solici  %></b> <a href="#"><button>Ver</button></a></p>
     </div>
     
     

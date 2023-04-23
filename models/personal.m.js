@@ -13,6 +13,18 @@ class personalModel{
         })
     }
 
+    //listar por ID
+    listarID(parametro) {
+        return new Promise((resolve, reject) => {
+            connection.query('SELECT * FROM `personal` WHERE id = ?' , [parametro] , function (error, results, fields) {
+                if (error) throw error;
+                let json = JSON.stringify(results);
+                console.log(results)
+                resolve (json);
+            })
+        })
+    }
+
     //listar por cedula
     listarCedula(parametro) {
         return new Promise((resolve, reject) => {

@@ -21,6 +21,24 @@ class personalControllers {
     })
   }
 
+  //listar por ID
+  listarID(parametro) {
+    return new Promise((resolve, reject) => {
+      personalModel.listarID(parametro)
+      .then((json) => {
+        let resultado = JSON.parse(json)
+        if (resultado.length == 0) {
+           console.log('No existe personal');
+           return resolve(`No hay personal registrados con esa ID: ${parametro}`)
+        };
+        resolve(resultado);
+      })
+      .catch((err) => {
+        reject(err)
+      })
+    })
+  }
+
   //listar por cedula
   listarCedula(parametro) {
     return new Promise((resolve, reject) => {

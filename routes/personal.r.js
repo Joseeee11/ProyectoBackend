@@ -18,6 +18,17 @@ router.get('/', seccion, verificador.soloAdmin, function(req, res, next) {
     res.status(404).render('error')
   })
 });
+//mostrar por ID
+router.get('/id:id', seccion,verificador.soloAdmin, function(req, res, next) {
+  const parametro = req.params.id
+  personalControllers.listarID(parametro)
+  .then((resultado) => {
+    res.status(200).render('personal', {title: 'PERSONAL TÉCNICO', resultado: resultado });
+  })
+  .catch((err) => {
+    res.status(404).render('error')
+  })
+});
 //mostrar por cedula
 router.get('/CI:CI', seccion,verificador.soloAdmin, function(req, res, next) {
   const parametro = req.params.CI
