@@ -5,7 +5,7 @@ const {verificarToken} = require('../helpers/login.h')
 /* GET home page. */
 router.get('/', async function(req, res, next) {
   const {GalletaDeToken} = req.cookies
-  const rol = null
+  const rol = false
   if (GalletaDeToken) {
     GalletaDeToken
     rol =  await verificarToken(GalletaDeToken) 
