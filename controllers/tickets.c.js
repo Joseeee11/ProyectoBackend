@@ -49,21 +49,35 @@ class ticketsControllers {
             try{
                 const disponibles = await ticketsModel.verCuantos(parametro.evento)
                 if (disponibles.length == 0) {
-                    return reject('El evento sellecionado no existe')
-                    
+                    return reject('El evento seleccionado no existe')
                 }
-                
+                var cambio = disponibles[0].tickets_disponibles
+            
 
-            }catch{
-
+            }catch(error){
+                console.log(error);
+                return console.log('Error en disponible');
             }
             
             ticketsModel.agregar(parametro)
-            .then((resultado) =>  {
-              resolve(resultado)
+            .then(async(resultado) =>  {
+                cambio = cambio-1
+                console.log('Actualizo a '+ cambio);
+                try{
+                    const actualizado= ticketsModel.actualizar(cambio,parametro.evento)
+                    console.log(actualizado);
+                }catch(error){
+                    console.log(error);
+                }
+                resolve(resultado)
             })
             .catch((err) => {
-              reject(err)
+                console.log(err);
+                const { sqlMessage } = err
+                if ( sqlMessage ==`Duplicate entry '${parametro.CI_comprador}' for key 'CI_comprador'`) {
+                    reject("Se esta repitiendo la cédula: "+parametro.CI_comprador)
+                }
+              reject("Se agrego mal un parametro")
             })
           })
       }
