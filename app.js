@@ -17,6 +17,8 @@ var logoutRouter = require('./routes/logout.r');
 var mantenimientoEquipoRouter = require('./routes/m_equipo.r');
 var mantenimientoEspacioRouter = require('./routes/m_espacio.r');
 var eventosRouter = require('./routes/eventos.r');
+var ticketsRouter = require('./routes/tickets.r');
+
 
 var app = express();
 
@@ -45,9 +47,8 @@ app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/mantenimientoEquipo', mantenimientoEquipoRouter);
 app.use('/mantenimientoEspacio', mantenimientoEspacioRouter);
-// app.use('/eventos', eventosRouter); //crashea no se porque
 app.use('/eventos', eventosRouter);
-
+app.use('/tickets', ticketsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
