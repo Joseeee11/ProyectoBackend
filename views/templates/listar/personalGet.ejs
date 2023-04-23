@@ -1,0 +1,14 @@
+<% if (resultado.length === 0) {%>
+    <h3 class="TituloPrincipal">No hay Personal Registrados</h3>
+    <a href="/personal/agregar"> <button class="buttonAgregar">¡Añade uno!</button> </a>
+<% } else { resultado.forEach(personal => {%>
+    
+    <div class="containerP">
+        <img src="https://img.freepik.com/vector-premium/icono-circulo-usuario-anonimo-ilustracion-vector-estilo-plano-sombra_520826-1931.jpg" alt="Personal" style="width:90px">
+        <p><span> #<%= personal.id %> <%= personal.nombre  %></span> <span><%= personal.cargo  %></span></p>
+        <p><i>C.I:</i> <b><%= personal.CI %></b> ....  <i>Usuario:</i> <b><%= personal.usuario_unico  %></b>  </p>
+        <p><i>Especialidad:</i><b><%= personal.especialidad  %></b></p>
+    </div>
+    
+    
+<% })} %>

@@ -1,0 +1,33 @@
+<%- include('templates/head', {TituloPrincipal:'Agregar Personal'}) %>
+<body>
+    <%- include('templates/nav') %>
+    <div class="tituloLogin">
+        <h2><%= title %></h2>
+    </div>
+    <div class="containerLogin">
+        <form action="/personal/agregar" method="post">
+      
+          <label for="nombre">Nombre y Apellido</label>
+          <input type="text" name="nombre" placeholder="Ingresa su nombre y apellido..." class="text1">
+
+          <label for="CI">Cédula de Identidad</label>
+          <input type="text" name="CI" placeholder="Ingresa la CI del personal..." class="text1">
+          
+          <label for="usuario">Usuario</label>
+          <input type="text" name="usuario" placeholder="Ingresa un usuario único..." class="text1">
+
+          <label for="contrasena">Contraseña</label>
+          <input type="password" name="contrasena" placeholder="Ingresa una contraseña..." class="text1">
+      
+          <label for="cargo">Cargo</label>
+          <input type="text" name="cargo" placeholder="Ingresa su cargo..." class="text1">
+
+          <label for="especialidad">Especialidad</label>
+          <input type="text" name="especialidad" placeholder="Ingresa su especialidad..." class="text1">
+
+          <input type="submit" value="¡Añadir!" class="buttonLogin2">
+      
+        </form>
+    </div>
+</body>
+</html>
