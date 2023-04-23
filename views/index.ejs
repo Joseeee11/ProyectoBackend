@@ -11,9 +11,9 @@
               <% } else if (rol == "personal") {%>
                 <a href="/personal/MiCuenta">Mi Cuenta</a>
               <% } else if (rol == "admin") {%>
-                
-              <% } else {%>
-
+                <a href="/">Mi Cuenta</a>
+              <% } else if (rol == false){%>
+                <a href="/">Mi Cuenta</a>
               <% } %>
   
               <div class="dropdown">
