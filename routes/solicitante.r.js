@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const {verificarToken} = require('../helpers/login.h')
 
 //importar controladores 
 var solicitantesControllers = require("../controllers/solicitantes.c.js")
@@ -21,13 +22,19 @@ router.get('/', seccion, verificador.restringirSolicitante, function(req, res, n
   })
 });
 
-router.get('/MyInfo', seccion, verificador.verificador, async function(req, res, next) {
+router.get('/MiCuenta', seccion, verificador.verificador, async function(req, res, next) {
   const {GalletaDeToken} = req.cookies
   console.log('info');
+  var rol = false
+    if (GalletaDeToken) {
+      rol =  await verificarToken(GalletaDeToken) 
+      rol=rol.role
+    }
+  console.log('tu rol es : '+rol);
   try{
     const resultado = await solicitantesControllers.MiInfo(GalletaDeToken)
     console.log(resultado);
-    res.send(resultado)
+    res.status(200).render('miCuenta', {title: "Soy un Solicitante", resultado: resultado, cookie:GalletaDeToken, rol: rol})
   }catch(error){
     console.log(error);
     res.status(404).send('Error en la Base de Datos')
@@ -66,7 +73,7 @@ router.post('/agregar', seccion, verificador.restringirSolicitante, function(req
 });
 
 //eliminar
-router.delete('/eliminar/:CI', seccion, verificador.restringirSolicitante, function(req, res, next) {
+router.delete('/eliminar/:CI', seccion, verificador.soloAdmin, function(req, res, next) {
   const parametro = req.params.CI
   solicitantesControllers.eliminar(parametro)
   .then((resultado) => {

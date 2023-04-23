@@ -46,8 +46,8 @@ class personalControllers {
       var De_base = await personalModel.MiInfo(infoToken.name)
       De_base=De_base[0]
       console.log(De_base);
-      const {nombre, CI, cargo, especialidad } = De_base
-      const resultado = {nombre, CI, cargo, especialidad }
+      const {nombre, CI, cargo, especialidad, usuario_unico, id} = De_base
+      const resultado = {nombre, CI, cargo, especialidad, usuario_unico, id }
       return resultado
     }catch(error){
       console.log(error);

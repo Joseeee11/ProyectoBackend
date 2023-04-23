@@ -3,12 +3,13 @@ var router = express.Router();
 var personalControllers = require("../controllers/personal.c.js")
 var verificador = require("../middleware/login.mid.js");
 const {seccion} = require("../middleware/login.mid")
+const {verificarToken} = require('../helpers/login.h')
 
 //importamos bcrypt
 const bcryptjs = require('bcryptjs');
 
 //listar
-router.get('/', seccion, /*verificador.restringirSolicitante,*/ function(req, res, next) {
+router.get('/', seccion, verificador.soloAdmin, function(req, res, next) {
   personalControllers.listar()
   .then((resultado)=>{
     res.status(200).render('personal', {title: 'PERSONAL TÉCNICO', resultado: resultado });
@@ -18,7 +19,7 @@ router.get('/', seccion, /*verificador.restringirSolicitante,*/ function(req, re
   })
 });
 //mostrar por cedula
-router.get('/CI:CI', seccion,verificador.restringirSolicitante, function(req, res, next) {
+router.get('/CI:CI', seccion,verificador.soloAdmin, function(req, res, next) {
   const parametro = req.params.CI
   personalControllers.listarCedula(parametro)
   .then((resultado) => {
@@ -30,7 +31,7 @@ router.get('/CI:CI', seccion,verificador.restringirSolicitante, function(req, re
 });
 
 // post
-router.get('/agregar', seccion, verificador.restringirSolicitante, function(req, res, next) {
+router.get('/agregar', seccion, verificador.soloAdmin, function(req, res, next) {
   res.status(200).render('personalPost', { title: 'Añade un Personal' });
 });
 router.post('/agregar', seccion, verificador.soloAdmin, function(req, res, next) {
@@ -47,13 +48,19 @@ router.post('/agregar', seccion, verificador.soloAdmin, function(req, res, next)
   })
 });
 
-router.get('/MyInfo', seccion, verificador.verificador, async function(req, res, next) {
+router.get('/MiCuenta', seccion, verificador.verificador, async function(req, res, next) {
   const {GalletaDeToken} = req.cookies
   console.log('info');
+  var rol = false
+    if (GalletaDeToken) {
+      rol =  await verificarToken(GalletaDeToken) 
+      rol=rol.role
+    }
+  console.log('tu rol es : '+rol);
   try{
     const resultado = await personalControllers.MiInfo(GalletaDeToken)
     console.log(resultado);
-    res.send(resultado)
+    res.status(200).render('miCuenta', {title: 'Soy un Personal', resultado: resultado, cookie: GalletaDeToken, rol : rol})
   }catch(error){
     console.log(error);
     res.status(404).send('Error en la Base de Datos')
@@ -64,7 +71,7 @@ router.get('/MyInfo', seccion, verificador.verificador, async function(req, res,
 
 
 //eliminar
-router.delete('/eliminar/:CI', seccion, /*verificador.soloAdmin,*/ function(req, res, next) {
+router.delete('/eliminar/:CI', seccion, verificador.soloAdmin, function(req, res, next) {
   const parametro = req.params.CI
   personalControllers.eliminar(parametro)
   .then((resultado) => {
@@ -76,3 +83,4 @@ router.delete('/eliminar/:CI', seccion, /*verificador.soloAdmin,*/ function(req,
 })   //PROBAR CON /eliminar/30976127
 
 module.exports = router;
+

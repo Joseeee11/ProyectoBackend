@@ -11,10 +11,10 @@ router.get('/', seccion,verificador.restringirSolicitante, function(req, res, ne
     console.log('estamos en ruta')
     trabajosControllers.listar()
     .then((resultado) => {
-      res.send(resultado);
+      res.status(200).render('trabajos', { title: 'TRABAJOS RESERVADOS para EQUIPOS', resultado: resultado });
     })
     .catch((err) => {
-      res.send(err)
+      res.status(404).render(err)
     })
     }
 )

@@ -1,6 +1,48 @@
 <%- include('templates/head.ejs', {TituloPrincipal:'Pagina de Inicio'}) %>
   <body>
-    <%- include('templates/nav') %>
+    <header>
+      <nav>
+          <div class="topnav">
+              <a class="active" href="/">Inicio</a>
+              <a href="/equipos">Equipos</a>
+              <a href="/">About Us</a>
+              <% if (rol == "solicitante") {%>
+                <a href="/solicitantes/MiCuenta">Mi Cuenta</a>
+              <% } else if (rol == "personal") {%>
+                <a href="/personal/MiCuenta">Mi Cuenta</a>
+              <% } else if (rol == "admin") {%>
+                <a href="/">Mi Cuenta</a>
+              <% } %>
+  
+              <div class="dropdown">
+                  <button class="dropbtn">Para Más...
+                    <i class="fa fa-caret-down"></i>
+                  </button>
+  
+                  <div class="dropdown-content">
+                    
+                    <div class="roww">
+                      <div class="columnn">
+                          <a href="/equipos" >EQUIPOS</a>
+                          <a href="/espacios">ESPACIOS</a>
+                          <a href="#">EVENTOS</a>
+                      </div>
+                      <div class="columnn">
+                          <a href="#">RESERVAS</a>
+                          <a href="/trabajos">TRABAJOS RESERVADOS</a>
+                          <a href="#">TRABAJOS TECNICOS</a>
+                      </div>
+                      <div class="columnn">
+                          <a href="#">TICKETS</a>
+                          <a href="/solicitantes">SOLICITANTES</a>
+                          <a href="/personal">PERSONAL</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+      </nav>
+    </header>
 
     <div class="tituloPrincipal">
       <h1 class="centrado"> <%= title %> </h1>
