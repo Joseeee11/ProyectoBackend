@@ -47,6 +47,21 @@ router.post('/agregar', seccion, verificador.soloAdmin, function(req, res, next)
   })
 });
 
+router.get('/MyInfo', seccion, verificador.verificador, async function(req, res, next) {
+  const {GalletaDeToken} = req.cookies
+  console.log('info');
+  try{
+    const resultado = await personalControllers.MiInfo(GalletaDeToken)
+    console.log(resultado);
+    res.send(resultado)
+  }catch(error){
+    console.log(error);
+    res.status(404).send('Error en la Base de Datos')
+  }
+});
+
+
+
 
 //eliminar
 router.delete('/eliminar/:CI', seccion, /*verificador.soloAdmin,*/ function(req, res, next) {

@@ -1,4 +1,6 @@
 const personalModel = require("../models/personal.m")
+const {verificarToken} = require('../helpers/login.h.js')
+
 //importamos bcrypt
 const bcryptjs = require('bcryptjs');
 
@@ -36,6 +38,24 @@ class personalControllers {
       })
     })
   }
+
+  async MiInfo(Galleta){
+    try{
+      const infoToken = await verificarToken(Galleta)
+      console.log(infoToken);
+      var De_base = await personalModel.MiInfo(infoToken.name)
+      De_base=De_base[0]
+      console.log(De_base);
+      const {nombre, CI, cargo, especialidad } = De_base
+      const resultado = {nombre, CI, cargo, especialidad }
+      return resultado
+    }catch(error){
+      console.log(error);
+      return null
+    }
+  }
+
+
 
     //agregar un personal
     agregar(parametro){
