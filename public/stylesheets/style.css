@@ -25,6 +25,11 @@ body {
 .centeer {
   text-align: center;
 }
+.cuenta {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 /*BOTON*/

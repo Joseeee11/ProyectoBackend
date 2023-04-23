@@ -27,8 +27,8 @@ class solicitantesControllers {
       console.log(infoToken);
       var De_base = await solicitantesModel.MiInfo(infoToken.name)
       De_base=De_base[0]
-      const {nombre_apellido, CI, fecha_nacimiento, direccion, nro_telefono} = De_base
-      const resultado = {nombre_apellido, CI, fecha_nacimiento, direccion, nro_telefono}
+      const {nombre_apellido, CI, fecha_nacimiento, direccion, nro_telefono, usuario_unico, id} = De_base
+      const resultado = {nombre_apellido, CI, fecha_nacimiento, direccion, nro_telefono, usuario_unico, id}
       return resultado
     }catch(error){
       console.log(error);

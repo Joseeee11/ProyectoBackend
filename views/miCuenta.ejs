@@ -1,0 +1,48 @@
+<%- include('templates/head', {TituloPrincipal:'Mi Cuenta'}) %>
+<body>
+    <%- include('templates/nav') %>
+    <div class="tituloPrincipal">
+        <h1 class="centrado"> <%= title %> </h1>
+    </div>
+
+    <% if (rol === "solicitante") { %>
+        <div class="row cuenta">
+            <div class="column">
+            <div class="card">
+                <div class="centrado">
+                    <img src="https://w7.pngwing.com/pngs/128/223/png-transparent-user-person-profile-instagram-ui-colored-icon.png" alt="Jane" style="width:80%" class="centrado">
+                </div>
+                <div class="container">
+                <h2 class="textcentrado"><%= resultado.nombre_apellido  %></h2>
+                <p class="title textcentrado"><%= resultado.id  %></p>
+                <p class="textcentrado"><b><%= resultado.usuario_unico  %></b></p>
+                <p><i class="title">C.I:</i> <%= resultado.CI  %></p>
+                <p><i class="title">Contacto:</i> <%= resultado.nro_telefono  %></p>
+                <p><i class="title">Fecha de Nacimiento:</i> <%= resultado.fecha_nacimiento  %></p>
+                <p><i class="title">Dirección:</i> <%= resultado.direccion  %></p>
+                </div>
+            </div>
+            </div>
+        </div>
+    <% } %>
+    <% if (rol == "personal") { %>
+        <div class="row cuenta">
+            <div class="column">
+            <div class="card">
+                <div class="centrado">
+                    <img src="https://img.freepik.com/vector-premium/icono-circulo-usuario-anonimo-ilustracion-vector-estilo-plano-sombra_520826-1931.jpg" alt="Jane" style="width:80%" class="centrado">
+                </div>
+                <div class="container">
+                <h2 class="textcentrado"><%= resultado.nombre  %></h2>
+                <p class="title textcentrado"><%= resultado.id  %></p>
+                <p class="textcentrado"><b><%= resultado.usuario_unico  %></b></p>
+                <p><i class="title">C.I:</i> <%= resultado.CI  %></p>
+                <p><i class="title">Cargo:</i> <%= resultado.cargo  %></p>
+                <p><i class="title">Especialidad:</i> <%= resultado.especialidad  %></p>
+                </div>
+            </div>
+            </div>
+        </div>
+    <% } %>
+</body>
+</html>
