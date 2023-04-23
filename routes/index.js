@@ -10,6 +10,7 @@ router.get('/', async function(req, res, next) {
     GalletaDeToken
     rol =  await verificarToken(GalletaDeToken) 
   }
+  console.log('tu rol es : '+rol);
   res.status(200).render('index', { title: 'SALA DE AUDIOVISUALES' , cookie : GalletaDeToken, rol : rol});
 });
 
