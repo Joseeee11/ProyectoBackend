@@ -60,12 +60,16 @@ class reserva_espaciosModel {
     agregar(parametro){
         console.log("estoy agregando")
         return new Promise((resolve, reject) => {
-            console.log(parametro);
             connection.query("INSERT INTO `reservas_espacios` set ?", [parametro], function (error, results, fields) {
-            if (error) reject (error);
-                resolve("Se agrego correctamente");
+            if (error) return reject (error);
+
+                
+            resolve("Se agrego correctamente");
             })
         })
+    }
+    actualizarElEspacio(parametro){
+
     }
 }
 

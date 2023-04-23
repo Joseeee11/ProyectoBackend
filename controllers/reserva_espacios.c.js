@@ -110,7 +110,10 @@ class reserva_espaciosControllers {
       }
       reserva_espaciosModel.agregar(parametro)
       .then((resultado) =>  {
+        
+        
         resolve(resultado)
+
       })
       .catch((error) => {
         console.log(error);
