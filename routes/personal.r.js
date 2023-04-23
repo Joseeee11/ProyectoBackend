@@ -19,7 +19,7 @@ router.get('/', seccion, verificador.soloAdmin, function(req, res, next) {
   })
 });
 //mostrar por ID
-router.get('/id:id', seccion,verificador.soloAdmin, function(req, res, next) {
+router.get('/id:id', seccion,verificador.restringirSolicitante, function(req, res, next) {
   const parametro = req.params.id
   personalControllers.listarID(parametro)
   .then((resultado) => {
