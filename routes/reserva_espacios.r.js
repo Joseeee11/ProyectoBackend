@@ -11,7 +11,7 @@ const {seccion} = require("../middleware/login.mid")
 router.get('/', seccion, verificador.restringirSolicitante, function(req, res, next) {
   reserva_espaciosControllers.listar()
   .then((resultado) => {
-    res.send(resultado)
+    res.status(200).render('reserva', { title: 'RESERVAS', resultadoRs: resultado });
   })
   .catch((err) => {
     res.send(err)
@@ -19,7 +19,7 @@ router.get('/', seccion, verificador.restringirSolicitante, function(req, res, n
 });
 
 //Listar por ID
-router.get('/:id', seccion,verificador.restringirSolicitante, function(req, res, next) {
+router.get('/id:id', seccion,verificador.restringirSolicitante, function(req, res, next) {
   let parametro = req.params.id
   console.log(parametro)
 
