@@ -69,7 +69,21 @@ class reserva_espaciosModel {
         })
     }
     actualizarElEspacio(parametro){
+        return new Promise((resolve, reject) => {
+            connection.query("UPDATE `espacios` set `estatus` = 'Ocupado' WHERE id = ?",[parametro],function(error,results,fields){
+                if (error) return reject (error);
 
+                resolve(true)
+            })
+        })
+    }
+    noAgregarFecha(fecha,id){
+        return new Promise((resolve, reject) => {
+            connection.query('SELECT * FROM `reservas_espacios` WHERE `fecha` = ? AND `espacio_solici` = ? ' , [fecha,id] , function (error, results, fields) {
+                if (error) throw error;
+                resolve (results);
+            })
+        })
     }
 }
 

@@ -103,22 +103,51 @@ class reserva_espaciosControllers {
   //agregar una reserva de espacios
   agregar(parametro){
     console.log(parametro);
-    return new Promise((resolve, reject) => {
-      // el if compara lo que se debe tener para agregar 
+    return new Promise(async(resolve, reject) => {
+
       if (!parametro || !parametro.hora_inicio || !parametro.hora_fin || !parametro.personal_solici || !parametro.solicitante || !parametro.fecha || !parametro.motivo || !parametro.espacio_solici) {
         return reject("Se debe ingresar correctamente los parametros")
       }
-      reserva_espaciosModel.agregar(parametro)
-      .then((resultado) =>  {
-        
-        
-        resolve(resultado)
 
-      })
-      .catch((error) => {
-        console.log(error);
-        reject(error)
-      })
+      try{
+        // const buscar = Object(parametro.fecha+'T04:00:00.000Z')
+        // console.log('A buscar: '+buscar);
+        // const base = JSON.parse(await reserva_espaciosModel.noAgregarFecha(parametro.espacio_solici))
+        // base.forEach(encontrado => {
+        //   if (encontrado.fecha == buscar) {
+        //     reject('Ya hay una reserva para esta fecha')
+        //   }
+        // });
+        
+        const ocupado = await reserva_espaciosModel.noAgregarFecha(parametro.fecha,parametro.espacio_solici)
+        if (ocupado.length != 0) {
+          return reject ('Ya hay una reserva para esta fecha')
+        }
+
+        reserva_espaciosModel.agregar(parametro)
+        .then(async(resultado) =>  {
+          const espacioCambiar = parametro.espacio_solici
+          try{
+            const cambio = await reserva_espaciosModel.actualizarElEspacio(espacioCambiar)
+            console.log(cambio);
+  
+            resolve(resultado)
+  
+          }catch(error){
+            console.log(error);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          reject(error)
+        })
+
+        
+      }catch{
+
+      }
+      // el if compara lo que se debe tener para agregar 
+
     })
 }
 }
