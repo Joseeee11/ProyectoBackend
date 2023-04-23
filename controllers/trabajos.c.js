@@ -153,8 +153,13 @@ class trabajosControllers {
             resolve(resultado)
           })
           .catch((error) => {
+            const {sqlMessage} = error
+            console.log(sqlMessage);
+            if (sqlMessage == 'Cannot add or update a child row: a foreign key constraint fails (`bd_audiovisuales`.`trabajos`, CONSTRAINT `personal_involucrado` FOREIGN KEY (`personal_solici`) REFERENCES `personal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)' ) {
+              return reject("El personal que ingreso, no se encruentra en la base de datos")
+            }
             console.log(error);
-            reject()
+            reject(null)
           })
         }) 
     }
