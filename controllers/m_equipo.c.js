@@ -1,8 +1,8 @@
-const mantenimientoModel = require ('../models/trabajo_equipo.m')
+const mantenimientoModel = require ('../models/m_equipo.m')
 
 
 
-class mantenimientoCrontrolles {
+class mantenimientoControllers {
     //listar general
     listar(){
       return new Promise ((resolve, reject) => {
@@ -19,17 +19,36 @@ class mantenimientoCrontrolles {
         });
       } )
     }
+
+    //POR ID
+    listarID(parametro) {
+      return new Promise((resolve, reject) => {
+        mantenimientoModel.listarID(parametro)
+        .then((json) => {
+          let resultado = JSON.parse(json)
+          if (resultado.length == 0) {
+             console.log('No existe reservas');
+             return reject(`No hay trabajos de mantenimiento con esa id: ${parametro}`)
+          };
+          console.log(resultado)
+          resolve(resultado)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+      })
+    }
+
+
+    //AGREGAR
     agregar(parametro){
         console.log(parametro);
         return new Promise((resolve, reject) => {
           // el if compara lo que se debe tener para agregar 
-          if (!parametro || !parametro.nombre || !parametro.direccion || !parametro.descripcion || !parametro.estatus) {
+          if (!parametro || !parametro.equipo_mantenimiento || !parametro.personal_encargado || !parametro.fecha || !parametro.motivo) {
             return reject("Se debe ingresar correctamente los parametros")
           }
-          if (parametro.estatus != "Disponible" && parametro.estatus != "Ocupado" && parametro.estatus != "Mantenimiento") {
-            return resolve(`El estatus del equipo solo puede estar en: Disponible, Ocupado, Mantenimiento`);
-          }
-          espaciosModel.agregar(parametro)
+          mantenimientoModel.agregar(parametro)
           .then((resultado) =>  {
             resolve(resultado)
           })
@@ -41,4 +60,4 @@ class mantenimientoCrontrolles {
     
 
 }
-module.exports= new mantenimientoCrontrolles()
+module.exports= new mantenimientoControllers()

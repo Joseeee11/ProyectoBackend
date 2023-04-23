@@ -11,11 +11,11 @@ var solicitantesRouter = require('./routes/solicitante.r');
 var personalRouter = require('./routes/personal.r');
 var trabajosRouter = require('./routes/trabajos.r');
 var reserva_espaciosRouter = require('./routes/reserva_espacios.r');
-//var reservasRouter = require('./routes/reservas.r');
 var reserva_equiposRouter = require('./routes/reserva_equipos.r');
 var loginRouter = require('./routes/login.r');
 var logoutRouter = require('./routes/logout.r');
-var trabajoEquipoRouter = require('./routes/trabajo_equipo.r');
+var mantenimientoEquipoRouter = require('./routes/m_equipo.r');
+var mantenimientoEspacioRouter = require('./routes/m_espacio.r');
 
 var app = express();
 
@@ -38,12 +38,13 @@ app.use('/equipos', equiposRouter);
 app.use('/solicitantes', solicitantesRouter);
 app.use('/personal', personalRouter);
 app.use('/trabajos', trabajosRouter);
-//app.use('/reservas', reservasRouter);
 app.use('/reserva_espacios', reserva_espaciosRouter);
 app.use('/reserva_equipos', reserva_equiposRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
-app.use('/trabajoEquipo', trabajoEquipoRouter);
+app.use('/mantenimientoEquipo', mantenimientoEquipoRouter);
+app.use('/mantenimientoEspacio', mantenimientoEspacioRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var mantenimientoControllers = require("../controllers/trabajo_equipo.c")
+var mantenimientoControllers = require("../controllers/m_espacio.c")
 var verificador = require("../middleware/login.mid.js");
 const {seccion} = require("../middleware/login.mid")
 
@@ -14,21 +14,29 @@ router.get('/', seccion, verificador.restringirSolicitante, function(req, res, n
     .catch ((err) => {
       res.status(404).send(err)
     })
-    // .then ((resultado) => {
-    //   res.status(200).render('mantenimientos', {title: 'mantenimiento', resultado: resultado });
-    // })
-    // .catch ((err) => {
-    //   res.status(404).render('error');
-    // })
+});
+//listar por ID
+router.get('/id:id', seccion,verificador.restringirSolicitante, function(req, res, next) {
+  const id = req.params.id
+  mantenimientoControllers.listarID(id)
+  .then((resultado) => {
+    res.status(200).send(resultado);
+  })
+  .catch((err) => {
+    res.send(err)
+  })
 });
 
+
+
+//AGREGAR
 router.get('/agregar', seccion, verificador.restringirSolicitante, function(req, res, next) {
-    res.status(200).render('mantenimientosPOST', { title: 'Añade un mantenimientos' });
+    res.status(200).render('mantenimientosPost', { title: 'Añade un Mantenimiento para Espacio' });
 });
 
 router.post('/agregar', seccion,verificador.restringirSolicitante, function(req, res, next) {
-    const { equipo_mantenimiento, personal_encargado, fecha, motivo} = req.body
-    const parametro = { equipo_mantenimiento, personal_encargado, fecha, motivo}
+    const { espacio_mantenimiento, personal_encargado, fecha, motivo} = req.body
+    const parametro = { espacio_mantenimiento, personal_encargado, fecha, motivo}
     mantenimientoControllers.agregar(parametro)
     .then((resultado) => {
       console.log("se agrego correctamente :)")
@@ -41,4 +49,3 @@ router.post('/agregar', seccion,verificador.restringirSolicitante, function(req,
   });
 
 module.exports = router;
-
