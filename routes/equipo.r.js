@@ -25,7 +25,7 @@ router.get('/id:id', seccion, verificador.verificador, function(req, res, next) 
   let parametro = req.params.id  //este ID lo guardamos en la variable parametro, pues este sera nuestro parametro de busqueda
   equipoControllers.listarID(parametro) //llamamos a la funcion listarID() y le enviamos el parametro de busqueda
   .then((resultado) => {
-    res.status(200).render('equipo', {title: 'EQUIPOS', resultado: resultado }); //mostramos al usuario
+    res.status(200).render('equipo', {title: 'EQUIPO ENCONTRADO', resultado: resultado }); //mostramos al usuario
   })
   .catch((err) => {
     res.status(404).render('error'); //mostramos al usuario el error

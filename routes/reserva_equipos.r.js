@@ -23,7 +23,7 @@ router.get('/id:id', seccion,verificador.restringirSolicitante, function(req, re
   const id = req.params.id
   reserva_equiposControllers.listarID(id)
   .then((resultado) => {
-    res.status(200).render('r_equipos', { title: 'RESERVAS de EQUIPOS', resultado: resultado });
+    res.status(200).render('r_equipos', { title: 'RESERVA ENCONTRADA', resultado: resultado });
   })
   .catch((err) => {
     res.send(err)

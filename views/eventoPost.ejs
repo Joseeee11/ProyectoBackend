@@ -1,0 +1,30 @@
+<%- include('templates/head', {TituloPrincipal:'Agregar Evento'}) %>
+<body>
+    <%- include('templates/nav') %>
+    <div class="tituloLogin">
+        <h2><%= title %></h2>
+    </div>
+    <div class="containerLogin">
+        <form action="/eventos/agregar" method="post">
+      
+          <label for="nombre">Nombre</label>
+          <input type="text" name="nombre" placeholder="Ingresa nombre del evento..." class="text1">
+      
+          <label for="personal_encargado">Personal Responsable</label>
+          <input type="text" name="personal_encargado" placeholder="Ingresa el id del personal encargado..." class="text1">
+
+          <label for="equipo_solici">Equipo Solicitado</label>
+          <input type="text" name="equipo_solici" placeholder="Ingresa el id del equipo solicitado..." class="text1">
+      
+          <label for="espacio_solici">Espacio Solicitado</label>
+          <input type="text" name="espacio_solici" placeholder="Ingresa el id del espacio solicitado..." class="text1">
+      
+          <label for="tickets_disponibles">Número de Tickets</label>
+          <input type="text" name="tickets_disponibles" placeholder="Ingresa el número de tickets o voletos..." class="text1">
+      
+          <input type="submit" value="¡Añadir!" class="buttonLogin2">
+      
+        </form>
+    </div>
+</body>
+</html>

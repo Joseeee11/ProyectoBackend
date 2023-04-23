@@ -20,11 +20,11 @@ router.get('/', seccion,verificador.restringirSolicitante, function(req, res, ne
 )
 
 //listar por id
-router.get('/:id', seccion,verificador.restringirSolicitante, function(req, res, next) {
+router.get('/id:id', seccion,verificador.restringirSolicitante, function(req, res, next) {
   let parametro = req.params.id
   trabajosControllers.listarID(parametro)
   .then((resultado) => {
-    res.send(resultado)
+    res.status(200).render('trabajos', { title: 'TRABAJO ENCONTRADO', resultado: resultado });
   })
   .catch((err) => {
     res.send(err)
@@ -98,18 +98,21 @@ router.delete('/eliminar/:id', seccion,verificador.restringirSolicitante, functi
 }) //PROBAR CON /eliminar/4
 
 //agregar trabajos
+router.get('/agregar', seccion, verificador.restringirSolicitante, function(req, res, next) {
+  res.status(200).render('trabajosPost', { title: 'Añadir Trabajo para Equipo' });
+});
 router.post('/agregar', seccion,verificador.restringirSolicitante, function(req, res, next) {
   const { personal_solici, reserva_solici, equipos_solici, fecha_inicio, fecha_fin, descripcion} = req.body
   const parametro = { personal_solici, reserva_solici, equipos_solici, fecha_inicio, fecha_fin, descripcion}
   trabajosControllers.agregar(parametro)
   .then((resultado) => {
     console.log("se agrego correctamente :)")
-    res.send(resultado);
+    res.status(200).redirect('/trabajos')
   })
   .catch(() => {
     trabajosControllers.revisarAgregar()
     .then((disponible)=>{
-      res.send(disponible)
+      res.status(200).redirect('/trabajos')
     })
     .catch((err)=>{
       console.log("error")

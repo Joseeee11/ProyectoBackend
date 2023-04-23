@@ -1,0 +1,33 @@
+<%- include('templates/head', {TituloPrincipal:'Agregar Trabajos'}) %>
+<body>
+    <%- include('templates/nav') %>
+    <div class="tituloLogin">
+        <h2><%= title %></h2>
+    </div>
+    <div class="containerLogin">
+        <form action="/trabajos/agregar" method="post">
+      
+          <label for="personal_solici">Personal Solicitado</label>
+          <input type="text" name="personal_solici" placeholder="Ingresa el id del personal solicitado..." class="text1">
+
+          <label for="equipos_solici">Equipo Solicitado</label>
+          <input type="text" name="equipos_solici" placeholder="Ingresa el id del equipo solicitado..." class="text1">
+      
+          <label for="reserva_solici">Reserva Solicitada</label>
+          <input type="text" name="reserva_solici" placeholder="Ingresa el id del reserva solicitada..." class="text1">
+      
+          <label for="descripcion">Descripción</label>
+          <input type="text" name="descripcion" placeholder="Ingresa una descripcion del trabajo..." class="text1">
+      
+          <label for="fecha_inicio">Fecha Inicial del Trabajo</label>
+          <input type="date" name="fecha_inicio" placeholder="Ingresa fecha de inicio del trabajo..." class="text1">
+      
+          <label for="fecha_fin">Fecha Final del Trabajo</label>
+          <input type="date" name="fecha_fin" placeholder="Ingresa fecha de fin del trabajo..." class="text1">
+ 
+          <input type="submit" value="¡Añadir!" class="buttonLogin2">
+      
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<% if (resultado.length === 0) {%>
+    <h3 class="TituloPrincipal">No hay Eventos Registrados</h3>
+    <a href="/eventos/agregar"> <button class="buttonAgregar">¡Añade uno!</button> </a>
+<% } else { resultado.forEach(evento => {%>
+    
+    <div class="containerT">
+        <p class="textcentrado"> <span>#<%= evento.id %> <%= evento.nombre %></span></p>
+        <p class="textcentrado title"><i>Tickets Disponibles: <%= evento.tickets_disponibles %></i> </p>
+        <p><i>Personal Responsable: </i> <b><%= evento.personal_encargado %></b> <a href="/personal/id<%= evento.personal_encargado %>"><button class="ver">Ver Personal</button></a></p>
+        <p><i>Espacio solicitado: </i> <b><%= evento.espacio_solici %></b> <a href="/espacios/id<%= evento.espacios_solici %>"><button class="ver">Ver Espacio</button></a></p>
+        <p><i>Equipo solicitado: </i> <b><%= evento.equipo_solici %></b> <a href="/equipos/id<%= evento.equipos_solici %>"><button class="ver">Ver Equipo</button></a></p>
+        
+    </div>
+    
+    
+<% })} %>

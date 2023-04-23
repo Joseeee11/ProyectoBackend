@@ -26,7 +26,7 @@ router.get('/id:ID', seccion,verificador.restringirSolicitante, function(req, re
   const parametro = req.params.ID
   solicitantesControllers.listarID(parametro)
   .then((resultado) => {
-    res.status(200).render('solicitante', { title: 'SOLICITANTES', resultado: resultado });
+    res.status(200).render('solicitante', { title: 'SOLICITANTE ENCONTRADO', resultado: resultado });
   })
   .catch((err) => {
     res.send('Ocurrió un error').status(404)
@@ -58,7 +58,7 @@ router.get('/CI:CI', seccion,verificador.restringirSolicitante, function(req, re
   const parametro = req.params.CI
   solicitantesControllers.listar_Cedula(parametro)
   .then((resultado) => {
-    res.send(resultado).status(200);
+    res.status(200).render('solicitante', { title: 'SOLICITANTE ENCONTRADO', resultado: resultado });
   })
   .catch((err) => {
     res.send('Ocurrió un error').status(404)

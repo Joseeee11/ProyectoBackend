@@ -23,7 +23,7 @@ router.get('/id:id', seccion,verificador.restringirSolicitante, function(req, re
   const parametro = req.params.id
   personalControllers.listarID(parametro)
   .then((resultado) => {
-    res.status(200).render('personal', {title: 'PERSONAL TÉCNICO', resultado: resultado });
+    res.status(200).render('personal', {title: 'PERSONAL ENCONTRADO', resultado: resultado });
   })
   .catch((err) => {
     res.status(404).render('error')
@@ -34,7 +34,7 @@ router.get('/CI:CI', seccion,verificador.soloAdmin, function(req, res, next) {
   const parametro = req.params.CI
   personalControllers.listarCedula(parametro)
   .then((resultado) => {
-    res.send(resultado);
+    res.status(200).render('personal', {title: 'PERSONAL ENCONTRADO', resultado: resultado });
   })
   .catch((err) => {
     res.status(404).render('error')

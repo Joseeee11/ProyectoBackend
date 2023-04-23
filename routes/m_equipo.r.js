@@ -20,7 +20,7 @@ router.get('/id:id', seccion,verificador.restringirSolicitante, function(req, re
   const id = req.params.id
   mantenimientoControllers.listarID(id)
   .then((resultado) => {
-    res.status(200).render('m_equipo', {tittle: 'TRABAJOS de MANTENIMIENTO para EQUIPOS', resultado: resultado})
+    res.status(200).render('m_equipo', {tittle: 'MANTENIMIENTO ENCONTRADO', resultado: resultado})
   })
   .catch((err) => {
     res.send(err)

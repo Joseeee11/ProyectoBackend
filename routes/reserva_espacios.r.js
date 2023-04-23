@@ -25,7 +25,7 @@ router.get('/id:id', seccion,verificador.restringirSolicitante, function(req, re
   reserva_espaciosControllers.listarID(parametro)
   .then((resultado) => {
     console.log('estamos en rutas');
-    res.status(200).render('r_espacios', { title: 'RESERVAS de ESPACIOS', resultado: resultado });
+    res.status(200).render('r_espacios', { title: 'RESERVA ENCONTRADA', resultado: resultado });
   })
   .catch((err) => {
     res.status(200).render(err)

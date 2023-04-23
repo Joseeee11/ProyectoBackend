@@ -26,7 +26,7 @@ router.get('/id:id', seccion,verificador.verificador, function(req, res, next) {
   let parametro = req.params.id
   espaciosControllers.listarID(parametro)
   .then((resultado) => {
-    res.status(200).render('espacio', {title: 'ESPACIOS', resultado: resultado });
+    res.status(200).render('espacio', {title: 'ESPACIO ENCONTRADO', resultado: resultado });
   })
   .catch((err) => {
     res.status(404).render('error');

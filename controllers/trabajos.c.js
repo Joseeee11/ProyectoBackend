@@ -156,7 +156,7 @@ class trabajosControllers {
             console.log(error);
             reject()
           })
-        })
+        }) 
     }
     revisarAgregar(){
       console.log("entramos a revisar");

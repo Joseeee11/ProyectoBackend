@@ -7,8 +7,7 @@ const {seccion} = require("../middleware/login.mid")
 router.get('/', seccion, verificador.restringirSolicitante, function(req, res, next) {
     eventosControllers.listar()
     .then ((resultado) => {
-        res.send(resultado)
-      //res.status(200).render('m_espacio', {title: 'TRABAJOS de eventos para ESPACIOS', resultado: resultado})
+        res.status(200).render('evento', { title: 'EVENTOS', resultado: resultado });
     })
     .catch ((err) => {
       res.status(404).send(err)
@@ -20,20 +19,25 @@ router.get('/id:id', seccion,verificador.restringirSolicitante, function(req, re
   console.log(id);
   eventosControllers.listarID(id)
   .then((resultado) => {
-    res.status(200).send(resultado)
-  })
+    res.status(200).render('evento', { title: 'EVENTOS', resultado: resultado });
+})
   .catch((err) => {
-    res.send(err)
-  })
+    res.status(404).send(err)
+})
 });
 
+
+//Agregar
+router.get('/agregar', seccion, verificador.restringirSolicitante, function(req, res, next) {
+    res.status(200).render('eventoPOST', { title: 'Añade un Evento' });
+  });
 router.post('/agregar', seccion,verificador.restringirSolicitante, function(req, res, next) {
   const { nombre, personal_encargado, espacio_solici, equipo_solici, tickets_disponibles} = req.body
   const parametro = { nombre, personal_encargado, espacio_solici, equipo_solici, tickets_disponibles}
   eventosControllers.agregar(parametro)
   .then((resultado) => {
     console.log("se agrego correctamente :)")
-    res.send(resultado);
+    res.status(200).redirect('/eventos')
   })
   .catch((err) => {
     console.log("errorrrrrrr")
