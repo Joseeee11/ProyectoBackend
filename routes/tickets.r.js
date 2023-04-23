@@ -7,8 +7,7 @@ const {seccion} = require("../middleware/login.mid")
 router.get('/', seccion, verificador.restringirSolicitante, function(req, res, next) {
     ticketsControllers.listar()
     .then ((resultado) => {
-        res.send(resultado)
-      //res.status(200).render('m_espacio', {title: 'TRABAJOS de tickets para ESPACIOS', resultado: resultado})
+      res.status(200).render('ticket', { title: 'TICKETS para EVENTOS', resultado: resultado });
     })
     .catch ((err) => {
       res.status(404).send(err)
@@ -20,7 +19,7 @@ router.get('/id:id', seccion,verificador.restringirSolicitante, function(req, re
   console.log(id);
   ticketsControllers.listarID(id)
   .then((resultado) => {
-    res.status(200).send(resultado)
+    res.status(200).render('ticket', { title: 'TICKET ENCONTRADO', resultado: resultado });
   })
   .catch((err) => {
     res.send(err)

@@ -31,6 +31,37 @@ body {
   align-items: center;
 }
 
+/*TABLA*/
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.tablita {
+  background-color: #f8aa61;
+}
+.tabla {
+  background-color:#fdc59f;
+}
+.letra {
+  font-size: 16px;
+  text-align: center;
+}
+.verT {
+  border: none;
+  border-radius: 6px;
+  background-color: #333;
+  color: #ccc;
+  padding: 8px;
+}
 
 /*BOTON*/
 .buttonAgregar {

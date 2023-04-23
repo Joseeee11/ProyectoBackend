@@ -1,0 +1,26 @@
+<%- include('templates/head.ejs', {TituloPrincipal:'Lista de Tickest'}) %>
+<body>
+    <%- include('templates/nav') %>
+    <div class="tituloPrincipal">
+        <h1 class="centrado"> <%= title %> </h1>
+    </div>
+    <div class="centrado">
+        <a href="/tickets/agregar"> <button class="buttonAgregar"><h3>¡Añadir!</h3></button> </a>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div>
+        <table>
+            <tr >
+              <th class="tablita letra">ID</th>
+              <th class="tabla letra">EVENTO</th>
+              <th class="tablita letra">COMPRADOR</th>
+              <th class="tabla letra">CI</th>
+              <th class="tablita letra">TIPO</th>
+            </tr>
+            <%- include('templates/listar/ticketsGet') %>
+        </table>
+    </div>
+</body>
+</html>
