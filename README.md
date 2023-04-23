@@ -1,18 +1,18 @@
-###Sala de Audiovisuales (Proyecto Backend)
+# Sala de Audiovisuales
 <br>
-####Colaboradores <ul>
+<h2> Colaboradores </h2><ul>
 <li>Rosimar J. Barrios M.  <i>c.i:30.976.217</i></li>
 <li>Cristian J. Rangel B.  <i>c.i:31.898.075</i></li>
 <li>Margreth C. Daboin H.  <i>c.i:31.368.992</i></li>
 <li>Javier Olivar<i>c.i:30.737.648</i></li>
 </ul>
 <br>
-####Introducción
+<h2>Introducción</h2>
 <p>
 Nuestro programa tiene como objetivo principal brindarle al usuario mayor comodidad a la hora de gestionar su "Sala de Audiovisuales", donde pueda registrar usuarios solicitantes de los servicios y aquellas reservas específicas, pero que a su vez tenga registro de los usuarios que laboran deltro de esa Sala. De igual forma permita un tipo de organización a los trabajadores, que puedan ver sus trabajos pendientes y los equipos que les son asignados para su reparación. Además también cuenta con un acceso a la organización de eventos o talleres que le permitan al usuario principal una mayor planificación de los mismos.
 <br>
 </p>
-####Tecnologías y Herramientas empleadas
+<h2>Tecnologías y Herramientas empleadas </h2>
 Principalmente este programa trabaja con el entorno de tiempo de ejecución de JavaScript: <b><i>Node js</i></b>; del cual se hizo uso de paquetes que facilitaron la elaboración del programa (aplicación) como son:
 <ul>
 <li>Express-generator  = <b><i>$npm i -g express-generator</i></b></li>
@@ -27,11 +27,11 @@ Principalmente este programa trabaja con el entorno de tiempo de ejecución de J
 
 Ahora para el arranque de nuestro sistema se hizo uso de la herramienta de  <b><i>Postman</i></b>, la cual nos permite interactuar con nuestra API hacer todos aquellas operaciones CRUD (Create, Read, Update, Delete) , en ella se harán las pruebas con los métodos HTTP: delete (eliminar) y put (modificar). De igual forma nuestro programa cuanta con una atractiva <b> interfaz gráfica </b>donde trabajaremos los métodos HTTP: get (listar) y post (agregar).
 <br>
-####Instalación y Arranque del Sistema
+<h2>Instalación y Arranque del Sistema</h2>
 Teniendo en cuenta que ya esta clonado nuestro repositorio, que ya tiene acceso al mismo y necesita arrancar el sistema se hará lo siguiente:
 <br>
 
-#####Arranque del Sistema:
+<h3>Arranque del Sistema:</h3>
 <ol>
 <li>En vista de que empleamos <i>.gitingnore</i> para ocultar archivos como <b>.env</b> o la carpeta de <b>node_modules</b>, primero ha de instalar <i>npm</i> de manera que se instalen todos los archivos necesarios para el funcionamiento del sistema. Esto lo podrá hacer con <i><b>$ npm i</b></i>.</li>
 <li>En el momento en que se instale correctamente <i>npm</i> podemos iniciar nuestro sistema con el comando <i><b>$ npm run serve</b></i> con el cual llamará a <i>nodemon</i> y comenzará a correr nuestro servidor.</li>
@@ -39,13 +39,13 @@ Teniendo en cuenta que ya esta clonado nuestro repositorio, que ya tiene acceso 
 <li>En caso de no desear usar el navegador, también puede emplear aquella misma URL para acceder al sistema por medio de <i>Postman</i>.</li>
 </ol>
 
-#####Inicio de Sesión:
+<h3>Inicio de Sesión:</h3>
 Dentro de nuestro programa es necesario iniciar sesion, en el existen tres categorías de usuarios cada uno con determinadas restricciones de las que se hablará más adelante. Estas Categorías son: <ul>
 <li><i><b>Admin</b></i></li>
 <li><i><b>Personal</b></i></li>
 <li><i><b>Solicitante</b></i></li>
 </ul>Ahora para iniciar sesión se deben aportar los datos de: Nombre de usuario, Contraseña, e indicar su respectivo rol. A continuación se explicará el ingreso de los mismos en ambos modos  <i>(Postman, e Interfaz Gráfica)</i>.
-######POSTMAN
+<h4>POSTMAN</h4>
 <ol>
 <li>Nos dirigiremos a la dirección URL <b><i>http://localhost:3000/login</i></b> en método HTTP <b>post</b></li>
 <li>Luego en el cuerpo de la respuesta, es decir, el <b>body</b> (req.body) vamos a añadir en formato JSON nuestros datos de ingreso. Ejemplo ingresamos los datos:
@@ -59,7 +59,7 @@ Dentro de nuestro programa es necesario iniciar sesion, en el existen tres categ
 </li>
 <li>Por último presionamos <b>SEND</b> y nos ha de redireccionar a la página de inicio. Con esto podemos comenzar a interactuar con nuestro sistema.</li>
 </ol>
-######INTERFAZ GRÁFICA
+<h4>INTERFAZ GRÁFICA</h4>
 <ol>
 <li>En cuanto a nuestra interfaz gráfica, al iniciar nuestro sistema y dirigirnos a <i><b>http://localhost:3000/</b></i> se nos presentará una página de inicio con un botón <i><b>!LOG IN¡</b></i> , el cual nos indica que es para <i>Iniciar Sesion</i></li>
 <li>Luego de presionar el botón de <i><b>!LOG IN¡</b></i> este nos redireccionará a un formulario encontrado especifícamente en la URL: <i><b>http://localhost:3000/</b></i>. En aquel formulario se nos indica los datos a ingresar, y además, para agregar nuestro <i>rol</i> se desplegarán las únicas tres opciones: <i>ADMIN</i>, <i>PERSONAL</i>, o <i>SOLICITANTE</i></li>
@@ -67,7 +67,7 @@ Dentro de nuestro programa es necesario iniciar sesion, en el existen tres categ
 <i>Nota:  Como ya hemos iniciado sesion nos aparecerá un botón para cerrala titulado: <b>¡LOG OUT!</b></i></li>
 <li>Con esto ya hemos iniciado en nuestro sistema, con lo cual podemos interactuar con nuestra Interfaz, siempre y cuando sean los llamados CRUD leer y crear.</li>
 </ol>
-#####Datos Importantes de Funcionamiento:
+<h3>Datos Importantes de Funcionamiento:</h3>
 <ul>
 <li>Nuestro sistema a la hora de buscar datos especificos de una entidad, por ejemplo busquedas por id, tendrá la siguiente sintaxis: <i>/entidad/id:id</i>, esto para major entendimiento del usuario y evitarnos errores a la hora de ingresar rutas. </li>
 <li>La Interfaz gráfica solo realizará llamados CRUD Read y Create, es decir, leer y crear; por lo tanto solo ejecuta métodos HTTP post y get. De hecho por esta razón empleamos Postman para interactuar con los demás métodos</li>
@@ -82,13 +82,11 @@ http://localhost:3000/personal/modificar/3
 ```
 </li>
 </ul>
-#####Restricciones:
-######ADMIN
-<ul>
+<h3>Restricciones:</h3>
+<h4>ADMIN</h4><ul>
 <li>No tiene Restricciones</li>
 </ul>
-######PERSONAL
-<ul>
+<h4>PERSONAL</h4><ul>
 <li>Crear Personal.</li>
 <li>Modificar Personal</li>
 <li>Modificar Solicitante</li>
@@ -96,8 +94,7 @@ http://localhost:3000/personal/modificar/3
 <li>Eliminar Solicitante</li>
 <li>Listar Personal Específico</li>
 </ul>
-######SOLICITANTE
-<ul>
+<h4>SOLICITANTE</h4><ul>
 <li>Ver Reservas</li>
 <li>Ver Trabajos</li>
 <li>Ver Solicitantes</li>
@@ -110,4 +107,4 @@ http://localhost:3000/personal/modificar/3
 <li>Crear de cualquier Entidad</li>
 </ul>
 
-####FIN
+<h2>FIN</h2>
