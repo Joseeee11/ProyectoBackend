@@ -21,6 +21,25 @@ class solicitantesControllers {
     })
   }
 
+    //listar por ID
+    listarID(parametro){
+      return new Promise((resolve, reject) => {
+  
+        solicitantesModel.listarID(parametro)
+        .then((json) => {
+          let resultado = JSON.parse(json)
+          if (resultado.length == 0) {
+             console.log('No existe solicitante');
+             return resolve(`No hay solicitantes registrados con esa ID: ${parametro}`)
+          };
+          resolve(resultado);
+        })
+        .catch((err) => {
+          reject(err)
+        })
+      })
+    }
+
   async MiInfo(Galleta){
     try{
       const infoToken = await verificarToken(Galleta)

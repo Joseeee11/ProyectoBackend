@@ -1,0 +1,18 @@
+<% if (resultado.length === 0) {%>
+    <h3 class="TituloPrincipal">No hay Reservas de Espacios Registradas</h3>
+    <a href="/reserva_espacios/agregar"> <button class="buttonAgregar">¡Añade uno!</button> </a>
+<% } else { resultado.forEach(reserva => {%>
+    
+    <div class="containerT">
+        <p class="textcentrado"> <span>Reserva #<%= reserva.id %></span></p>
+        <p class="textcentrado title"><%= reserva.motivo  %> </p>
+        <p>Fecha: <%= reserva.fecha %></p>
+        <p>Hora de inicio: <%= reserva.hora_inicio  %></p>
+        <p>Hora de fin: <%= reserva.hora_fin  %></p>
+        <p><i>Solicitante: </i> <b><%= reserva.solicitante %></b> <a href="/solicitantes/id<%= reserva.solicitante %>"><button class="ver">Ver Solicitante</button></a></p>
+        <p><i>Espacio solicitado: </i> <b><%= reserva.espacio_solici %></b> <a href="/espacios/id<%= reserva.espacio_solici %>"><button class="ver">Ver Equipo</button></a></p>
+        <p><i>Personal solicitado: </i> <b><%= reserva.personal_solici %></b> <a href="/personal/id<%= reserva.personal_solici  %>"><button class="ver">Ver Personal</button></a></p>
+    </div>
+    
+    
+<% })} %>

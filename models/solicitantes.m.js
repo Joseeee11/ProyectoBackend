@@ -13,6 +13,19 @@ class solicitantesModel {
         })
     }
 
+    //listar por ID
+    listarID(parametro) {
+        console.log('llegamos a modelo')
+        return new Promise((resolve, reject) => {
+            connection.query('SELECT * FROM `solicitantes` WHERE id = ?' , [parametro] , function (error, results, fields) {
+                if (error) throw error;
+                let json = JSON.stringify(results);
+                console.log(results)
+                resolve (json);
+            })
+        })
+    }
+
     //listar por cedula
     listarCedula(parametro) {
         console.log('llegamos a modelo')

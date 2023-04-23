@@ -11,7 +11,7 @@ const {seccion} = require("../middleware/login.mid")
 router.get('/',  seccion, verificador.restringirSolicitante, function(req, res, next) {
   reserva_equiposControllers.listar()
   .then((resultado) => {
-    res.status(200).render('reserva', { title: 'RESERVAS', resultadoRq: resultado });
+    res.status(200).render('r_equipos', { title: 'RESERVAS de EQUIPOS', resultado: resultado });
   })
   .catch((err) => {
     res.send(err)
@@ -23,7 +23,7 @@ router.get('/id:id', seccion,verificador.restringirSolicitante, function(req, re
   const id = req.params.id
   reserva_equiposControllers.listarID(id)
   .then((resultado) => {
-    res.status(200).render('reserva', { title: 'RESERVAS de EQUIPOS', resultadoRq: resultado });
+    res.status(200).render('r_equipos', { title: 'RESERVAS de EQUIPOS', resultado: resultado });
   })
   .catch((err) => {
     res.send(err)

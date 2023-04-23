@@ -21,6 +21,17 @@ router.get('/', seccion, verificador.restringirSolicitante, function(req, res, n
     res.send(err)
   })
 });
+//busqueda por ID
+router.get('/id:ID', seccion,verificador.restringirSolicitante, function(req, res, next) {
+  const parametro = req.params.ID
+  solicitantesControllers.listarID(parametro)
+  .then((resultado) => {
+    res.status(200).render('solicitante', { title: 'SOLICITANTES', resultado: resultado });
+  })
+  .catch((err) => {
+    res.send('Ocurrió un error').status(404)
+  })
+});
 
 router.get('/MiCuenta', seccion, verificador.verificador, async function(req, res, next) {
   const {GalletaDeToken} = req.cookies

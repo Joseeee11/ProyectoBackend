@@ -11,10 +11,10 @@ const {seccion} = require("../middleware/login.mid")
 router.get('/', seccion, verificador.restringirSolicitante, function(req, res, next) {
   reserva_espaciosControllers.listar()
   .then((resultado) => {
-    res.status(200).render('reserva', { title: 'RESERVAS', resultadoRs: resultado });
+    res.status(200).render('r_espacios', { title: 'RESERVAS de ESPACIOS', resultado: resultado });
   })
   .catch((err) => {
-    res.send(err)
+    res.status(200).render(err)
   })
 });
 
@@ -22,14 +22,13 @@ router.get('/', seccion, verificador.restringirSolicitante, function(req, res, n
 router.get('/id:id', seccion,verificador.restringirSolicitante, function(req, res, next) {
   let parametro = req.params.id
   console.log(parametro)
-
   reserva_espaciosControllers.listarID(parametro)
   .then((resultado) => {
     console.log('estamos en rutas');
-    res.send(resultado)
+    res.status(200).render('r_espacios', { title: 'RESERVAS de ESPACIOS', resultado: resultado });
   })
   .catch((err) => {
-    res.send(err)
+    res.status(200).render(err)
   })
 });
 

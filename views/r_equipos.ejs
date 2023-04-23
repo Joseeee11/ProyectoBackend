@@ -4,16 +4,14 @@
     <div class="tituloPrincipal">
         <h1 class="centrado"> <%= title %> </h1>
     </div>
-    <div>
-        <h3 class="centrado"> <%= dato1 %> </h3>
-        <h3 class="centrado"> <%= dato2 %> </h3>
+    <div class="centrado">
+        <a href="/reserva_equipos/agregar"> <button class="buttonAgregar"><h3>¡Añadir!</h3></button> </a>
     </div>
-
     <br>
     <br>
     <br>
-    <div class="row">
-        <%- include('templates/listar/reservaGet') %>
+    <div class="row cuenta">
+        <%- include('templates/listar/r_equiposGet') %>
     </div>
 </body>
 </html>
