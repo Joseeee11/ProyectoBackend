@@ -45,7 +45,8 @@ app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/mantenimientoEquipo', mantenimientoEquipoRouter);
 app.use('/mantenimientoEspacio', mantenimientoEspacioRouter);
-//app.use('/eventos', eventosRouter); //crashea no se porque
+// app.use('/eventos', eventosRouter); //crashea no se porque
+app.use('/eventos', eventosRouter);
 
 
 // catch 404 and forward to error handler
