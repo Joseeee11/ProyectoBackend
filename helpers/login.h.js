@@ -11,14 +11,14 @@ class login{
             },
             process.env.SECRETO,
             {
-                expiresIn:'1800s'
+                expiresIn:"1h"
             }
         )
         return  await cookie.serialize('GalletaDeToken', resultado, {
             httpOnly: true,
             secure: false,//process.env.VERI =="produccion",
             sameSite:'strict',
-            maxAge: 1800000,
+            maxAge: 1800,
             path:'/'
 
         })
