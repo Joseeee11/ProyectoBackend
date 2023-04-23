@@ -36,10 +36,10 @@ router.post('/agregar', seccion,verificador.restringirSolicitante, function(req,
     res.send(resultado);
   })
   .catch((err) => {
-    console.log("errorrrrrrr")
+    console.log("error al agregar")
     res.send(err)
   })
 });
-
+ 
 
 module.exports = router
