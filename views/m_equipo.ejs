@@ -1,0 +1,14 @@
+<%- include('templates/head.ejs', {TituloPrincipal:'Trabajos de Matenimiento'}) %>
+<body>
+    <%- include('templates/nav') %>
+    <div class="tituloPrincipal">
+        <h1 class="centrado"> <%= title %> </h1>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row cuenta">
+        <%- include('templates/listar/m_equipoGet') %>
+    </div>
+</body>
+</html>

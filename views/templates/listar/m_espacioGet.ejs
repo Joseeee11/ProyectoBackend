@@ -1,0 +1,15 @@
+<% if (resultado.length === 0) {%>
+    <h3 class="TituloPrincipal">No hay Trabajos de Mantenimiento para Espacios Registrados</h3>
+<% } else { resultado.forEach(mantenimiento => {%>
+    
+    <div class="containerT">
+        <p class="textcentrado"> <span>Mantenimiento #<%= mantenimiento.id %></span></p>
+        <p class="textcentrado title"><%= mantenimiento.motivo  %> </p>
+        <p>Fecha: <%= mantenimiento.fecha %></p>
+        <p>Finaliza el día: <%= mantenimiento.fecha_fin  %></p>
+        <p><i>Espacio en mantenimiento: </i> <b><%= mantenimiento.espacio_mantenimiento  %></b> <a href="/espacios/id<%= mantenimiento.espacio_mantenimiento %>"><button class="ver">Ver Espacio</button></a></p>
+        <p><i>Personal Encargado: </i> <b><%= mantenimiento.personal_encargado  %></b> <a href="/personal/id<%= mantenimiento.personal_encargado  %>"><button class="ver">Ver Personal</button></a></p>
+    </div>
+    
+    
+<% })} %>
