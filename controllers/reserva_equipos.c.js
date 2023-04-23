@@ -72,20 +72,34 @@ class reserva_equiposControllers {
   //agregar una reserva de equipo
   agregar(parametro){
     console.log(parametro);
-    return new Promise((resolve, reject) => {
-      // el if compara lo que se debe tener para agregar 
+    return new Promise(async(resolve, reject) => {
+
       if (!parametro || !parametro.solicitante || !parametro.hora_inicio || !parametro.hora_fin || !parametro.personal_solici || !parametro.fecha || !parametro.motivo || !parametro.equipo_solici) {
-        console.log("llega??");
         return reject("Se debe ingresar correctamente los parametros")
       }
-      reserva_equiposModel.agregar(parametro)
-      .then((resultado) =>  {
-        resolve(resultado)
-      })
-      .catch((error) => {
-        console.log(error);
-        reject(error)
-      })
+      try{
+        const ocupado = await reserva_equiposModel.noAgregarFecha(parametro.fecha,parametro.equipo_solici)
+        if (ocupado.length != 0) {
+          return reject ('Ya hay una reserva para esta fecha')
+        }
+        reserva_equiposModel.agregar(parametro)
+        .then(async(resultado) =>  {
+          const equipoCambiar = parametro.equipo_solici
+          try{
+            const cambio = await reserva_equiposModel.actualizarElEquipo(equipoCambiar)
+            console.log(cambio);
+            resolve(resultado)
+          }catch(error){
+            console.log(error);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          reject(error)
+        }) 
+      }catch{
+
+      }
     })
 }
 
