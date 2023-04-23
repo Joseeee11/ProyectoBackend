@@ -8,6 +8,7 @@ router.get('/', async function(req, res, next) {
   var rol = false
   if (GalletaDeToken) {
     rol =  await verificarToken(GalletaDeToken) 
+    rol=rol.role
   }
   console.log('tu rol es : '+rol);
   res.status(200).render('index', { title: 'SALA DE AUDIOVISUALES' , cookie : GalletaDeToken, rol : rol});
