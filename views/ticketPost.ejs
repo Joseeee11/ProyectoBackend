@@ -1,0 +1,31 @@
+<%- include('templates/head', {TituloPrincipal:'Venta de Tickets'}) %>
+<body>
+    <%- include('templates/nav') %>
+    <div class="tituloLogin">
+        <h2><%= title %></h2>
+    </div>
+    <div class="containerLogin">
+        <form action="/tickets/agregar" method="post">
+      
+          <label for="evento">Evento</label>
+          <input type="text" name="evento" placeholder="Ingresa el id del evento..." class="text1">
+      
+          <label for="nombre_comprador">Nombre y Apellido del Comprador</label>
+          <input type="text" name="nombre_comprador" placeholder="Ingresa nombre y apellido del comprador..." class="text1">
+
+          <label for="CI_comprador">Cédula del Comprador</label>
+          <input type="text" name="CI_comprador" placeholder="Ingresa la C.I del comprador..." class="text1">
+          
+          <label for="tipo">Estatus</label>
+          <select name="tipo"  class="text1" required>
+            <option value="VIP">VIP</option>
+            <option value="MEDIO" selected>MEDIO</option>
+            <option value="NORMAL">NORMAL</option>
+          </select>
+      
+          <input type="submit" value="¡Añadir!" class="buttonLogin2">
+      
+        </form>
+    </div>
+</body>
+</html>

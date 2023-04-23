@@ -19,7 +19,7 @@ router.get('/id:id', seccion,verificador.restringirSolicitante, function(req, re
   console.log(id);
   eventosControllers.listarID(id)
   .then((resultado) => {
-    res.status(200).render('evento', { title: 'EVENTOS', resultado: resultado });
+    res.status(200).render('evento', { title: 'EVENTO ENCONTRADO', resultado: resultado });
 })
   .catch((err) => {
     res.status(404).send(err)

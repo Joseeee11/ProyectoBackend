@@ -3,8 +3,8 @@
     <a href="/tickets/agregar"> <button class="buttonAgregar">¡Añade uno!</button> </a>
 <% } else { resultado.forEach(ticket => {%>
     <tr>
-        <th><%= ticket.id %></th>
-        <th><%= ticket.evento %> <a href="/eventos/id<%= ticket.evento %>"><button style="float: right;" class="verT">Ver Evento</button></a></th>
+        <th class="centeer"><%= ticket.id %></th>
+        <th> <%= ticket.evento %> <a href="/eventos/id<%= ticket.evento %>"><button style="float: right;" class="verT">Ver Evento</button></a></th>
         <th><%= ticket.nombre_comprador %></th>
         <th><%= ticket.CI_comprador %></th>
         <th><%= ticket.tipo %></th>

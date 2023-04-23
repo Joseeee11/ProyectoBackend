@@ -22,21 +22,25 @@ router.get('/id:id', seccion,verificador.restringirSolicitante, function(req, re
     res.status(200).render('ticket', { title: 'TICKET ENCONTRADO', resultado: resultado });
   })
   .catch((err) => {
-    res.send(err)
+    res.status(404).send(err)
   })
 });
 
+//agregar
+router.get('/agregar', seccion, verificador.restringirSolicitante, function(req, res, next) {
+  res.status(200).render('ticketPost', { title: 'Venta de Ticket' });
+});
 router.post('/agregar', seccion,verificador.restringirSolicitante, function(req, res, next) {
   const { evento, nombre_comprador, CI_comprador, tipo} = req.body
   const parametro = { evento, nombre_comprador, CI_comprador, tipo}
   ticketsControllers.agregar(parametro)
   .then((resultado) => {
     console.log("se agrego correctamente :)")
-    res.send(resultado);
+    res.status(200).redirect('/tickets');
   })
   .catch((err) => {
     console.log("error al agregar")
-    res.send(err)
+    res.status(404).send(err)
   })
 });
  
