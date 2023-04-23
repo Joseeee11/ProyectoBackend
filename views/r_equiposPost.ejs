@@ -1,0 +1,36 @@
+<%- include('templates/head', {TituloPrincipal:'Registrar una Reserva'}) %>
+<body>
+    <%- include('templates/nav') %>
+    <div class="tituloLogin">
+        <h2><%= title %></h2>
+    </div>
+    <div class="containerLogin">
+        <form action="/reserva_equipos/agregar" method="post">
+      
+          <label for="solicitante">Solicitante</label>
+          <input type="text" name="solicitante" placeholder="Ingresa el id del solicitante..." class="text1">
+
+          <label for="hora_inicio">Hora de Inicio</label>
+          <input type="text" name="hora_inicio" placeholder="Ingresa la hora inicial..." class="text1">
+          
+          <label for="hora_fin">Hora de Fin</label>
+          <input type="text" name="hora_fin" placeholder="Ingresa la hora final..." class="text1">
+
+          <label for="equipo_solici">Equipo Solicitado</label>
+          <input type="text" name="equipo_solici" placeholder="Ingresa el id del equipo solicitado..." class="text1">
+      
+          <label for="personal_solici">Personal Solicitado</label>
+          <input type="text" name="personal_solici" placeholder="Ingresa el id del personal solicitado..." class="text1">
+      
+          <label for="motivo">Motivo</label>
+          <input type="text" name="motivo" placeholder="Ingresa el motivo de la reserva..." class="text1">
+
+          <label for="fecha">Fecha</label>
+          <input type="date" name="fecha" placeholder="Ingresa la fecha que tendra acabo la reserva..." class="text1">
+
+          <input type="submit" value="¡Añadir!" class="buttonLogin2">
+      
+        </form>
+    </div>
+</body>
+</html>

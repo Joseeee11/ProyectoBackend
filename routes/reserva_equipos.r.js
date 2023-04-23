@@ -59,13 +59,16 @@ router.get('/fechasRango/:fechaI/:fechaF', seccion,verificador.restringirSolicit
 })    //PROBAR CON /fechasRango/2023-02-02/2023-12-12
 
 //agregar equipos
+router.get('/agregar', seccion, verificador.restringirSolicitante, function(req, res, next) {
+  res.status(200).render('r_equiposPost', { title: 'Reserva un Equipo' });
+});
 router.post('/agregar',  seccion, verificador.restringirSolicitante, function(req, res, next) {
   const { solicitante , hora_inicio, hora_fin, personal_solici, fecha, motivo, equipo_solici} = req.body
   const parametro = { solicitante, hora_inicio , hora_fin, personal_solici, fecha, motivo, equipo_solici}
   reserva_equiposControllers.agregar(parametro)
   .then((resultado) => {
     console.log("se agrego correctamente :)")
-    res.send(resultado);
+    res.status(200).redirect('/reserva_equipos')
   })
   .catch((err) => {
     res.send(err)
