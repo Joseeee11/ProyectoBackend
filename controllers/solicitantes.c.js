@@ -1,5 +1,6 @@
 const { json } = require("express");
 const solicitantesModel = require("../models/solicitantes.m.js")
+const {verificarToken} = require('../helpers/login.h.js')
 //importamos bcrypt
 const bcryptjs = require('bcryptjs');
 
@@ -20,7 +21,20 @@ class solicitantesControllers {
     })
   }
 
-  
+  async MiInfo(Galleta){
+    try{
+      const infoToken = await verificarToken(Galleta)
+      console.log(infoToken);
+      var De_base = await solicitantesModel.MiInfo(infoToken.name)
+      De_base=De_base[0]
+      const {nombre_apellido, CI, fecha_nacimiento, direccion, nro_telefono} = De_base
+      const resultado = {nombre_apellido, CI, fecha_nacimiento, direccion, nro_telefono}
+      return resultado
+    }catch(error){
+      console.log(error);
+      return null
+    }
+  }
 
   //listar por cedula
   listar_Cedula(parametro){

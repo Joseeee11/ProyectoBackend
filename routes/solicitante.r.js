@@ -8,6 +8,7 @@ const {seccion} = require("../middleware/login.mid")
 
 //importamos bcrypt
 const bcryptjs = require('bcryptjs');
+const loginH = require('../helpers/login.h.js');
 
 //mostrar
 router.get('/', seccion, verificador.restringirSolicitante, function(req, res, next) {
@@ -20,10 +21,17 @@ router.get('/', seccion, verificador.restringirSolicitante, function(req, res, n
   })
 });
 
-router.get('/', seccion, verificador.restringirSolicitante, function(req, res, next) {
-
-
-  
+router.get('/MyInfo', seccion, verificador.verificador, async function(req, res, next) {
+  const {GalletaDeToken} = req.cookies
+  console.log('info');
+  try{
+    const resultado = await solicitantesControllers.MiInfo(GalletaDeToken)
+    console.log(resultado);
+    res.send(resultado)
+  }catch(error){
+    console.log(error);
+    res.status(404).send('Error en la Base de Datos')
+  }
 });
 
 

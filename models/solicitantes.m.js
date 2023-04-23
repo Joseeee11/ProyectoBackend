@@ -26,6 +26,33 @@ class solicitantesModel {
         })
     }
 
+    MiInfo(infoToken){
+        console.log(infoToken);
+        return new Promise((resolve, reject) => {
+                    connection.query('SELECT * FROM `solicitantes` WHERE usuario_unico = ?',[infoToken], function (error, results, fields) {
+            if (error) {
+                console.log('Hay un error :'+error);
+                return reject ('Error al buscar usuario en la base de datos')
+            }
+            // let json = JSON.stringify(results);
+            // console.log(json)
+            // return ('hola');
+            console.log(results);
+            console.log('Encontrado');
+            return resolve(results);
+
+        })
+        })
+
+    
+
+    }
+
+
+
+
+
+
     //agregar solicitantes
     agregar(parametro){
         console.log("llegamos a modulos klk")
