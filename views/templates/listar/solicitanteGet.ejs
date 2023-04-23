@@ -1,0 +1,14 @@
+<% if (resultado.length === 0) {%>
+    <h3 class="TituloPrincipal">No hay Personal Registrados</h3>
+    <a href="/solicitantes/agregar"> <button class="buttonAgregar">¡Añade uno!</button> </a>
+<% } else { resultado.forEach(solicitante => {%>
+    
+    <div class="containerP">
+        <img src="https://w7.pngwing.com/pngs/128/223/png-transparent-user-person-profile-instagram-ui-colored-icon.png" alt="solicitante" style="width:90px">
+        <p><span> #<%= solicitante.id %> <%= solicitante.nombre_apellido  %></span> </p>
+        <p><i>C.I: </i> <b><%= solicitante.CI %></b> ....  <i>Usuario: </i> <b><%= solicitante.usuario_unico  %></b></p>
+        <p><i>Dirección: </i><b><%= solicitante.direccion  %></b></p>
+        <p><i>Fecha de Nacimiento: </i><b><%= solicitante.fecha_nacimiento  %></b></p>
+    </div>
+       
+<% })} %>

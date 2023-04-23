@@ -14,7 +14,7 @@ const loginH = require('../helpers/login.h.js');
 router.get('/', seccion, verificador.restringirSolicitante, function(req, res, next) {
   solicitantesControllers.listar()
   .then((resultado) => {
-    res.send(resultado);
+    res.status(200).render('solicitante', { title: 'SOLICITANTES', resultado: resultado });
   })
   .catch((err) => {
     res.send(err)
@@ -36,7 +36,7 @@ router.get('/MyInfo', seccion, verificador.verificador, async function(req, res,
 
 
 //busqueda por Cedula
-router.get('/:CI', seccion,verificador.restringirSolicitante, function(req, res, next) {
+router.get('/CI:CI', seccion,verificador.restringirSolicitante, function(req, res, next) {
   const parametro = req.params.CI
   solicitantesControllers.listar_Cedula(parametro)
   .then((resultado) => {
@@ -49,12 +49,15 @@ router.get('/:CI', seccion,verificador.restringirSolicitante, function(req, res,
 
 
 //agregar
+router.get('/agregar', seccion, verificador.restringirSolicitante, function(req, res, next) {
+  res.status(200).render('solicitantePost', { title: 'Registra Solicitante' });
+});
 router.post('/agregar', seccion, verificador.restringirSolicitante, function(req, res, next) {
   const { usuario_unico, nombre_apellido, CI, fecha_nacimiento, direccion, contrasena, nro_telefono} = req.body
   const parametro = { usuario_unico, nombre_apellido, CI, fecha_nacimiento, direccion, contrasena, nro_telefono}
   solicitantesControllers.agregar(parametro)
   .then((resultado) => {
-    res.send(resultado);
+    res.status(200).redirect('/solicitantes');
   })
   .catch((err) => {
     console.log("errorrrrrrr")
