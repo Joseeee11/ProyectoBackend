@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2023 at 09:01 AM
+-- Generation Time: Apr 30, 2023 at 07:03 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -44,7 +44,7 @@ INSERT INTO `equipos` (`id`, `nombre`, `serial`, `descripcion`, `fecha_adquisici
 (1, 'Canaima', 'ETSYDUFY', 'robot futurista', '2023-02-25', 'Disponible'),
 (2, 'Aro de Luz', 'CHGUIFGWU5463723', 'potente luz que tehara ver las stars', '2023-04-09', 'Mantenimiento'),
 (3, 'Camara 360', 'OEIQRUIWG7633476', 'camara pequeña, lente ultrasonico, vision nocturna', '2016-07-11', 'Ocupado'),
-(4, 'Pendrive 32gb', 'YYYU72GYU5003723', 'Azul de alto rendimiento', '2023-04-06', 'Mantenimiento');
+(12, 'PC', 'HAJHASHASH', 'Muy grande', '2023-04-08', 'Disponible');
 
 -- --------------------------------------------------------
 
@@ -66,8 +66,23 @@ CREATE TABLE `espacios` (
 
 INSERT INTO `espacios` (`id`, `nombre`, `direccion`, `descripcion`, `estatus`) VALUES
 (1, 'Espacio de Edicion Visual', 'Edificio 3 Aula 15', 'Se encarga de la edición de los videos educativos de los estudiantes', 'Disponible'),
-(2, 'Espacio de Grabación con Pantalla Verde', 'Edificio 1 Aula 4', 'Se encarga de la grabación de videos con efectos especiales', 'Ocupado'),
+(2, 'Espacio de Pantalla', 'Edificio 1 Aula 4', 'pantallas adaptables', 'Ocupado'),
 (6, 'Espacio de Musica XD', 'Edificio 3 Aula 16', 'Se encarga de la edición especifica del audio', 'Disponible');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `eventos`
+--
+
+CREATE TABLE `eventos` (
+  `id` int(15) NOT NULL,
+  `nombre` text NOT NULL,
+  `personal_encargado` int(15) NOT NULL,
+  `espacio_solici` int(15) NOT NULL,
+  `equipo_solici` int(15) NOT NULL,
+  `tickets_disponibles` int(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -167,6 +182,34 @@ INSERT INTO `solicitantes` (`id`, `usuario_unico`, `nombre_apellido`, `CI`, `fec
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tickets`
+--
+
+CREATE TABLE `tickets` (
+  `id` int(15) NOT NULL,
+  `evento` int(15) NOT NULL,
+  `nombre_comprador` text NOT NULL,
+  `CI_comprador` int(20) NOT NULL,
+  `tipo` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tq_mantenimiento`
+--
+
+CREATE TABLE `tq_mantenimiento` (
+  `id` int(15) NOT NULL,
+  `equipo_mantenimiento` int(15) NOT NULL,
+  `personal_encargado` int(15) NOT NULL,
+  `fecha` date NOT NULL,
+  `motivo` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `trabajos`
 --
 
@@ -186,6 +229,20 @@ CREATE TABLE `trabajos` (
 
 INSERT INTO `trabajos` (`id`, `personal_solici`, `reserva_solici`, `equipos_solici`, `fecha_inicio`, `fecha_fin`, `descripcion`) VALUES
 (1, 1, 1, 2, '2023-04-19', '2023-04-21', 'Orientacion de Herramientas Virtuales');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ts_mantenimiento`
+--
+
+CREATE TABLE `ts_mantenimiento` (
+  `id` int(15) NOT NULL,
+  `espacio_mantenimiento` int(15) NOT NULL,
+  `personal_encargado` int(15) NOT NULL,
+  `fecha` date NOT NULL,
+  `motivo` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -226,6 +283,15 @@ ALTER TABLE `espacios`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `eventos`
+--
+ALTER TABLE `eventos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `personal_encargado` (`personal_encargado`,`espacio_solici`,`equipo_solici`),
+  ADD KEY `E_solicitado` (`equipo_solici`),
+  ADD KEY `Es_solicitado` (`espacio_solici`);
+
+--
 -- Indexes for table `personal`
 --
 ALTER TABLE `personal`
@@ -257,6 +323,21 @@ ALTER TABLE `solicitantes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tickets`
+--
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `evento` (`evento`);
+
+--
+-- Indexes for table `tq_mantenimiento`
+--
+ALTER TABLE `tq_mantenimiento`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `equipo_mantenimiento` (`equipo_mantenimiento`,`personal_encargado`),
+  ADD KEY `personalEncargado` (`personal_encargado`);
+
+--
 -- Indexes for table `trabajos`
 --
 ALTER TABLE `trabajos`
@@ -264,6 +345,14 @@ ALTER TABLE `trabajos`
   ADD UNIQUE KEY `reserva_solici` (`reserva_solici`),
   ADD KEY `personal_solici` (`personal_solici`,`reserva_solici`,`equipos_solici`),
   ADD KEY `equipos_relacionados` (`equipos_solici`);
+
+--
+-- Indexes for table `ts_mantenimiento`
+--
+ALTER TABLE `ts_mantenimiento`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `espacio_mantenimiento` (`espacio_mantenimiento`,`personal_encargado`),
+  ADD KEY `personal_encargado` (`personal_encargado`);
 
 --
 -- Indexes for table `usuarios`
@@ -279,13 +368,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `equipos`
 --
 ALTER TABLE `equipos`
-  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `espacios`
 --
 ALTER TABLE `espacios`
   MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `eventos`
+--
+ALTER TABLE `eventos`
+  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `personal`
@@ -312,10 +407,28 @@ ALTER TABLE `solicitantes`
   MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tq_mantenimiento`
+--
+ALTER TABLE `tq_mantenimiento`
+  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `trabajos`
 --
 ALTER TABLE `trabajos`
   MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `ts_mantenimiento`
+--
+ALTER TABLE `ts_mantenimiento`
+  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
@@ -326,6 +439,14 @@ ALTER TABLE `usuarios`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `eventos`
+--
+ALTER TABLE `eventos`
+  ADD CONSTRAINT `E_solicitado` FOREIGN KEY (`equipo_solici`) REFERENCES `equipos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Es_solicitado` FOREIGN KEY (`espacio_solici`) REFERENCES `espacios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `P_encargado` FOREIGN KEY (`personal_encargado`) REFERENCES `personal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `reservas_equipos`
@@ -344,12 +465,32 @@ ALTER TABLE `reservas_espacios`
   ADD CONSTRAINT `solicitante_respon` FOREIGN KEY (`solicitante`) REFERENCES `solicitantes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `tickets`
+--
+ALTER TABLE `tickets`
+  ADD CONSTRAINT `evento_relacionado` FOREIGN KEY (`evento`) REFERENCES `eventos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tq_mantenimiento`
+--
+ALTER TABLE `tq_mantenimiento`
+  ADD CONSTRAINT `equipoM` FOREIGN KEY (`equipo_mantenimiento`) REFERENCES `equipos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `personalEncargado` FOREIGN KEY (`personal_encargado`) REFERENCES `personal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `trabajos`
 --
 ALTER TABLE `trabajos`
   ADD CONSTRAINT `equipos_relacionados` FOREIGN KEY (`equipos_solici`) REFERENCES `equipos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `personal_involucrado` FOREIGN KEY (`personal_solici`) REFERENCES `personal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `reserva_relacionada` FOREIGN KEY (`reserva_solici`) REFERENCES `reservas_equipos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `ts_mantenimiento`
+--
+ALTER TABLE `ts_mantenimiento`
+  ADD CONSTRAINT `espacioM` FOREIGN KEY (`espacio_mantenimiento`) REFERENCES `espacios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `personalEncargad` FOREIGN KEY (`personal_encargado`) REFERENCES `personal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
